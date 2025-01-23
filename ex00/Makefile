@@ -6,15 +6,14 @@
 #    By: baguiar- <baguiar-@student.42wolfsburg.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/14 11:45:17 by baguiar-          #+#    #+#              #
-#    Updated: 2025/01/14 12:41:53 by baguiar-         ###   ########.fr        #
+#    Updated: 2025/01/23 12:49:56 by baguiar-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = megaphone
 
 CC = c++
-CPPFLAGS = -std=c++98 -Wall -Wextra -Werror -pedantic
-RM = rm -f
+CPPFLAGS = -std=c++98 -Wall -Wextra -Werror
 
 SRC = megaphone.cpp
 OBJ = $(SRC:.cpp=.o)
