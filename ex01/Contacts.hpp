@@ -6,7 +6,7 @@
 /*   By: baguiar- <baguiar-@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 14:00:46 by baguiar-          #+#    #+#             */
-/*   Updated: 2025/01/23 10:58:04 by baguiar-         ###   ########.fr       */
+/*   Updated: 2025/02/06 11:48:25 by baguiar-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,23 +18,25 @@
 #include <string>
 #include "colors.hpp"
 
-class Contact{
-    private:
-        std::string _first_name;
-        std::string _last_name;
-        std::string _nickname;
-        std::string _phone_number;
-        std::string _darkest_secret;
-        std::string _input(std::string str);
-        std::string _trim(std::string str);
-
+class Contact
+{
     public:
         Contact(void);
         ~Contact(void);
-        void    add(void);
-        bool    valid(void);
-        int     short_view(int index);
-        void    large_view(void);
+        void setContact(std::string firstName, std::string lastName, std::string nickName,
+            std::string phoneNumber, std::string darkestSecret);
+        std::string getFirstName() const;
+        std::string getLastName() const;
+        std::string getNickName() const;
+        std::string getPhoneNumber() const;
+        std::string getDarkestSecret() const;
+        
+    private:
+        std::string firstName;
+        std::string lastName;
+        std::string nickName;
+        std::string phoneNumber;
+        std::string darkestSecret;
 };
 
 #endif
