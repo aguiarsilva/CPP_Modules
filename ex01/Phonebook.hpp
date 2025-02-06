@@ -6,7 +6,7 @@
 /*   By: baguiar- <baguiar-@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 14:00:32 by baguiar-          #+#    #+#             */
-/*   Updated: 2025/02/06 11:57:34 by baguiar-         ###   ########.fr       */
+/*   Updated: 2025/02/06 12:25:08 by baguiar-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ class PhoneBook
     private:
         Contact contacts[8];
         int     index;
-        bool    full;
+        int     totalContacts;
 
         
 };
