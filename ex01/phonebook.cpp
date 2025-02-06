@@ -6,7 +6,7 @@
 /*   By: baguiar- <baguiar-@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 14:01:08 by baguiar-          #+#    #+#             */
-/*   Updated: 2025/02/06 12:29:04 by baguiar-         ###   ########.fr       */
+/*   Updated: 2025/02/06 12:38:42 by baguiar-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,12 @@ void PhoneBook::searchContact() const
 
 void PhoneBook::displayContact(int index) const
 {
+    std::cout << "Contact information:" << std::endl;
+    std::cout << "First Name: " << contacts[index].getFirstName() << std::endl;
+    std::cout << "Last Name: " << contacts[index].getLastName() << std::endl;
+    std::cout << "Nickname: " << contacts[index].getNickName() << std::endl;
+    std::cout << "Phone Number: " << contacts[index].getPhoneNumber() << std::endl;
+    std::cout << "Darkest Secret: " << contacts[index].getDarkestSecret() << std::endl;
     
 }
 
