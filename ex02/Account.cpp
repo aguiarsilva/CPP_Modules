@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "Account.hpp"
-#include "colors.hpp"
 #include <iostream>
 #include <iomanip>
 #include <ctime>
@@ -59,7 +58,6 @@ void	Account::displayAccountsInfos( void )
 
 	Account::~Account(void)
 	{
-		std::cout << RED << "Account Destroyed" << DEFAULT << std::endl;
 		return;
 	}
 
