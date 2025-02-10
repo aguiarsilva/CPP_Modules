@@ -6,7 +6,7 @@
 /*   By: baguiar- <baguiar-@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 14:00:32 by baguiar-          #+#    #+#             */
-/*   Updated: 2025/02/06 12:25:08 by baguiar-         ###   ########.fr       */
+/*   Updated: 2025/02/06 23:15:39 by baguiar-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ class PhoneBook
 {
     public:
         PhoneBook(void);
-        ~PhoneBook(void);
+        ~PhoneBook();
         void addContact(const Contact& contact);
         void searchContact() const;
         void displayContact(int index) const;

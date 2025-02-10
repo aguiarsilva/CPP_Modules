@@ -6,12 +6,13 @@
 /*   By: baguiar- <baguiar-@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 14:01:08 by baguiar-          #+#    #+#             */
-/*   Updated: 2025/02/06 14:28:22 by baguiar-         ###   ########.fr       */
+/*   Updated: 2025/02/06 23:56:11 by baguiar-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Phonebook.hpp"
 #include <stdexcept>
+#include <sstream>
 
 PhoneBook::PhoneBook(void)
 {
@@ -28,15 +29,26 @@ PhoneBook::~PhoneBook(void)
 
 void PhoneBook::addContact(const Contact& contact)
 {
-    contacts[index] = contact;
-
-    std::cout << GREEN << "\nContact was added successfully at index " << index << std::endl;
-    if (totalContacts == 8)
-        std::cout << YELLOW << "Warning: last contact was replaced (phonebook is full)" << std::endl;
-    
-    index = (index + 1) % 8;
+   try
+   {
     if (totalContacts < 8)
+    {
+        contacts[index] = contact;
+        std::cout << GREEN << "\nContact was added successfully at index " << index << DEFAULT <<std::endl;
         totalContacts++;
+    }
+    else
+    {
+        contacts[index] = contact;
+        std::cout << GREEN << "\nContact was added successfully at index " << index << DEFAULT <<std::endl;
+        std::cout << YELLOW << "Warning: last contact was replaced (phonebook is full)" << DEFAULT << std::endl;
+    }
+    index = (index + 1) % 8;
+   }
+   catch (const std::exception& e)
+   {
+        std::cout << "Error adding contact: " << e.what() << std::endl;
+   }
 }
 
 void PhoneBook::searchContact() const
@@ -47,57 +59,75 @@ void PhoneBook::searchContact() const
         std::cout << "Phonebook is empty!" << std::endl;
         return ;
     }
-       
-    std::cout << std::setw(10) << "Index" << "|"
+    try
+    {
+         std::cout << std::setw(10) << "Index" << "|"
               << std::setw(10) << "First Name" << "|"
               << std::setw(10) << "Last Name" << "|"
               << std::setw(10) << "Nickname" << "|" << std::endl;
-    std::cout << std::setfill("-") << std::setw(44) << "-" << std::endl;
-    std::cout << std::setfill(" ");
+    std::cout << std::setfill('-') << std::setw(44) << "-" << std::endl;
+    std::cout << std::setfill(' ');
 
-    for (int i = 0; i <= totalContacts; i++)
+    for (int i = 0; i < totalContacts; i++)
     {
         std::cout << std::setw(10) << i << "|"
                   << std::setw(10) << truncateString(contacts[i].getFirstName()) << "|"
                   << std::setw(10) << truncateString(contacts[i].getLastName()) << "|"
-                  << std::setw(10) << truncateString(contacts[i].getNickname()) << "|" << std::endl;
+                  << std::setw(10) << truncateString(contacts[i].getNickName()) << "|" << std::endl;
     }
     
+    std::cout << "\nEnter the index to display contact: ";
     std::string input;
-    std::cout << "/nEnter the index to display contact: ";
-    std::getline(std::cin >> input);
+    std::getline(std::cin, input);
 
-    try 
-    {
-        int index = std::stoi(input);
+        std::istringstream iss(input);
+        int index;
+        if (!(iss >> index))
+            throw std::runtime_error("Invalid index number!");
         if (index < 0 || index >= totalContacts)
-            throw std::out_of_range("Invalid index number!");
+            throw std::out_of_range("Index is out of range!");
         displayContact(index);
+    
     }
-    catch (const std::invalid_arguments& e)
+    catch(const std::exception& e)
     {
-        std::cerr << "Error: Invalid input. Please enter a number." << std::endl;
-    }
-    catch (const std::out_of_range& e)
-    {
-        std::cerr << "Error: Index out of range!" << std::endl;
+        std::cout << "Error: " << e.what() << std::endl;
     }
 }
 
 void PhoneBook::displayContact(int index) const
 {
-    std::cout << "\nContact information:" << std::endl;
-    std::cout << "First Name: " << contacts[index].getFirstName() << std::endl;
-    std::cout << "Last Name: " << contacts[index].getLastName() << std::endl;
-    std::cout << "Nickname: " << contacts[index].getNickName() << std::endl;
-    std::cout << "Phone Number: " << contacts[index].getPhoneNumber() << std::endl;
-    std::cout << "Darkest Secret: " << contacts[index].getDarkestSecret() << std::endl;
+    try
+    {
+        std::cout << "\nContact information:" << std::endl;
+        std::cout << "First Name: " << contacts[index].getFirstName() << std::endl;
+        std::cout << "Last Name: " << contacts[index].getLastName() << std::endl;
+        std::cout << "Nickname: " << contacts[index].getNickName() << std::endl;
+        std::cout << "Phone Number: " << contacts[index].getPhoneNumber() << std::endl;
+        std::cout << "Darkest Secret: " << contacts[index].getDarkestSecret() << std::endl;
+    }
+    catch (const std::exception& e)
+    {
+        std::cout << "Error displaying contact: " << e.what() << std::endl;
+    }
+
     
 }
 
 std::string PhoneBook::truncateString(std::string str) const
 {
-    if (str.length() > 10)
-        return str.substr(0,9) + ".";
-    return str;
+    try
+    {
+        {
+            if (str.empty())
+                return str;
+            if (str.length() > 10)
+                return str.substr(0,9) + ".";
+            return str;
+        }
+    }
+    catch(const std::exception& e)
+    {
+        return "";
+    }
 }
