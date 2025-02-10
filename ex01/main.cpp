@@ -6,7 +6,7 @@
 /*   By: baguiar- <baguiar-@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 14:12:42 by baguiar-          #+#    #+#             */
-/*   Updated: 2025/02/06 23:55:38 by baguiar-         ###   ########.fr       */
+/*   Updated: 2025/02/10 12:06:43 by baguiar-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,9 @@ int main()
         std::cout << ("Enter command (ADD, SEARCH, EXIT): ");
         std::getline(std::cin, command);
 
-        if (command == "EXIT")
+        if (command == "EXIT" || command == "exit")
             break;
-        else if (command == "ADD")
+        else if (command == "ADD" || command == "add")
         {
             try
             {
@@ -73,7 +73,7 @@ int main()
                 std::cout << "Error adding contact: " << e.what() << std::endl;
             }
         }
-        else if (command == "SEARCH")
+        else if (command == "SEARCH" || command == "search")
         {
             phonebook.searchContact();
         }
