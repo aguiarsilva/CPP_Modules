@@ -6,7 +6,7 @@
 /*   By: baguiar- <baguiar-@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 14:12:42 by baguiar-          #+#    #+#             */
-/*   Updated: 2025/02/10 12:06:43 by baguiar-         ###   ########.fr       */
+/*   Updated: 2025/02/10 12:26:26 by baguiar-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,11 @@
 #include <iostream>
 #include <iomanip>
 #include <cstdlib>
+
+bool    isDigit(std::string& str)
+{
+    return !str.empty() && str.find_first_not_of("0123456789") == std::string::npos;
+}
 
 std::string getInput(const std::string& prompt)
 {
@@ -53,8 +58,15 @@ int main()
             std::getline(std::cin, lastName);
             std::cout << "Enter nickname: ";
             std::getline(std::cin, nickName);
-            std::cout << "Enter phone number: ";
-            std::getline(std::cin, phoneNumber);
+
+            do 
+            {
+                std::cout << "Enter phone number: ";
+                std::getline(std::cin, phoneNumber);
+                if (!isDigit(phoneNumber))
+                    std::cout << "Error: Phone number must contain only numbers. Please try again." << std::endl;
+            } while (!isDigit(phoneNumber));
+            
             std::cout << "Enter darkest secret: ";
             std::getline(std::cin, darkestSecret);
 
