@@ -20,7 +20,7 @@ int Account::_totalAmount = 0;
 int Account::_totalNbDeposits = 0;
 int Account::_totalNbWithdrawals = 0;
 
-//private methods
+//public methods
 
 int	Account::getNbAccounts( void )
 {
@@ -51,17 +51,6 @@ void	Account::displayAccountsInfos( void )
 			  << "withdrawals:" << Account::getNbWithdrawals() << std::endl;
 }
 
-void	Account::_displayTimestamp( void )
-{
-	std::time_t time_now = std::time(0);
-
-	char timestamp[100];
-	std::strftime(timestamp, sizeof(timestamp), "%Y%m%d_%H%M%S", std::localtime(&time_now));
-
-	std::cout << "[" << timestamp << "]" << std::endl;
-
-}
-
 Account::Account(int initial_deposit)
 {
 	this->_nbDeposits = 0;
@@ -77,12 +66,38 @@ Account::~Account(void)
 	return;
 }
 
+void	Account::makeDeposit( int deposit );
+bool	Account::makeWithdrawal( int withdrawal );
+int		Account::checkAmount( void ) const
+{
+	return this->_amount;
+}
+void	Account::displayStatus( void ) const
+{
+	_displayTimestamp();
+	std::cout <<
+	 "index:" << this->_accountIndex << ";" <<
+	 "amount:" << this->_totalAmount << ";" <<
+	 "deposits:" << this->_totalNbDeposits << ";" <<
+	 "withdrawals:" << this->_totalNbWithdrawals << ";" << std::endl;
+
+}
+
+//private methods
+
 Account::Account(void)
 {
 
 }
 
-void	Account::makeDeposit( int deposit );
-bool	Account::makeWithdrawal( int withdrawal );
-int		Account::checkAmount( void ) const;
-void	Account::displayStatus( void ) const;
+void	Account::_displayTimestamp( void )
+{
+	std::time_t time_now = std::time(0);
+
+	char timestamp[100];
+	std::strftime(timestamp, sizeof(timestamp), "%Y%m%d_%H%M%S", std::localtime(&time_now));
+
+	std::cout << "[" << timestamp << "]" << std::endl;
+
+}
+
