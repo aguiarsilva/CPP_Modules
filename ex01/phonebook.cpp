@@ -6,7 +6,7 @@
 /*   By: baguiar- <baguiar-@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 14:01:08 by baguiar-          #+#    #+#             */
-/*   Updated: 2025/02/06 23:56:11 by baguiar-         ###   ########.fr       */
+/*   Updated: 2025/02/12 21:37:52 by baguiar-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,8 @@ void PhoneBook::addContact(const Contact& contact)
     }
     else
     {
-        contacts[index] = contact;
-        std::cout << GREEN << "\nContact was added successfully at index " << index << DEFAULT <<std::endl;
+        contacts[7] = contact;
+        std::cout << GREEN << "\nContact was added successfully at index 7" << DEFAULT << std::endl;
         std::cout << YELLOW << "Warning: last contact was replaced (phonebook is full)" << DEFAULT << std::endl;
     }
     index = (index + 1) % 8;
