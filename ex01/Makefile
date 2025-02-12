@@ -6,7 +6,7 @@
 #    By: baguiar- <baguiar-@student.42wolfsburg.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/14 13:35:37 by baguiar-          #+#    #+#              #
-#    Updated: 2025/02/06 22:25:44 by baguiar-         ###   ########.fr        #
+#    Updated: 2025/02/12 13:55:14 by baguiar-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,4 +38,7 @@ fclean: clean
 
 re: fclean $(NAME)
 
-.PHONY: all clean fclean re
+valgrind: $(NAME)
+	valgrind --leak-check=full ./$(NAME)
+
+.PHONY: all clean fclean re valgrind
