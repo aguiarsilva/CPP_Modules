@@ -15,8 +15,11 @@ NAME = zombie
 CC = c++
 CPPFLAGS = -std=c++98 -Wall -Wextra -Werror
 
-SRC = megaphone.cpp
-INC = Zombie.hpp
+SRC = main.cpp \
+	  newZombie.cpp \
+	  randomChump.cpp \
+	  Zombie.cpp \
+
 OBJ = $(SRC:.cpp=.o)
 
 all: $(NAME)
