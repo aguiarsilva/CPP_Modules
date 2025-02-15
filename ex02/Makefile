@@ -3,23 +3,33 @@ NAME = brain
 CC = c++
 CPPFLAGS = -std=c++98 -Wall -Wextra -Werror
 
+SRC_DIR = src/
+OBJ_DIR = obj/
+INC_DIR = inc/
+
 SRC = main.cpp \
 
-OBJ = $(SRC:.cpp=.o)
+OBJ = $(addprefix $(OBJ_DIR), $(SRC:.cpp=.o))
+
+INC = -I $(INC_DIR)
 
 all: $(NAME)
 
-$(NAME): $(OBJ)
+$(OBJ_DIR):
+	mkdir -p $(OBJ_DIR)
+
+$(OBJ_DIR)%.o: $(SRC_DIR)%.cpp
+	$(CC) $(CPPFLAGS) $(INC) -c $< -o $@
+
+$(NAME): $(OBJ_DIR) $(OBJ)
 	$(CC) $(CPPFLAGS) $(OBJ) -o $(NAME)
 
-%.o: %..cpp
-	$(CC) $(CPPFLAGS) -c $< -o $@
-
 clean:
-	$(RM) $(OBJ)
+	rm -f $(OBJ)
+	rm -rf $(OBJ_DIR)
 
 fclean: clean
-	$(RM) $(NAME)
+	rm -f $(NAME)
 
 re: fclean $(NAME)
 
