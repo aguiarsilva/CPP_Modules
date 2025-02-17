@@ -15,6 +15,7 @@ Harl::~Harl()
 
 void Harl::complain(std::string level)
 {
+    int index = -1;
     void (Harl::*functPtr[])() = {&Harl::debug, &Harl::info, &Harl::warning, &Harl::error};
     std::string levels[] = {"DEBUG", "INFO", "WARNING", "ERROR"};
 
@@ -22,12 +23,28 @@ void Harl::complain(std::string level)
     {
         if (level == levels[i])
         {
-            (this->*functPtr[i])();
-            return;
+            index = i;
+            break ;
         }
     }
-
-    std::cout << "\nInvalid complaint level!" << std::endl;
+    switch(index)
+        {
+            case 0:
+                (this->*functPtr[0])();
+                break;
+            case 1:
+                (this->*functPtr[1])();
+                break;
+            case 2:
+                (this->*functPtr[2])();
+                break;
+            case 3:
+                (this->*functPtr[3])();
+                break;
+            default:
+                std::cout << "[ Probably complaining about insignificant problems ]" << std::endl;
+                break;
+        }
 }
 
 //private methods:
