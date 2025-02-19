@@ -65,60 +65,57 @@ std::ostream& operator<<(std::ostream& output, const Fixed& src)
     return output;
 }
 
-bool    operator<(const Fixed& obj) const
+bool    Fixed::operator<(const Fixed& obj) const
 {
     return this->_fixedPointNum < obj._fixedPointNum;
 }
 
-bool    operator>(const Fixed& obj) const
+bool    Fixed::operator>(const Fixed& obj) const
 {
     return this->_fixedPointNum > obj._fixedPointNum;
 }
 
-bool    operator<=(const Fixed& obj) const
+bool    Fixed::operator<=(const Fixed& obj) const
 {
     return this->_fixedPointNum <= obj._fixedPointNum;
 }
 
-bool    operator>=(const Fixed& obj) const
+bool    Fixed::operator>=(const Fixed& obj) const
 {
     return this->_fixedPointNum >= obj._fixedPointNum;
 }
 
-bool    operator==(const Fixed& obj) const
+bool    Fixed::operator==(const Fixed& obj) const
 {
     return this->_fixedPointNum == obj._fixedPointNum;
 }
 
-bool    operator!=(const Fixed& obj) const
+bool    Fixed::operator!=(const Fixed& obj) const
 {
     return this->_fixedPointNum != obj._fixedPointNum;
 }
 
-Fixed    operator+(const Fixed& obj) const
+Fixed    Fixed::operator+(const Fixed& obj) const
 {
-    Fixed res;
-    res._fixedPointNum = this->_fixedPointNum + obj._fixedPointNum;
-    return res;
+    return Fixed(this->toFloat() + obj.toFloat());
 }
 
-Fixed    operator-(const Fixed& obj) const
+Fixed    Fixed::operator-(const Fixed& obj) const
 {
-    Fixed res;
-    res._fixedPointNum = this->_fixedPointNum - obj._fixedPointNum;
-    return res;
+    return Fixed(this->toFloat() - obj.toFloat());
 }
 
-Fixed    operator/(const Fixed& obj) const
+Fixed    Fixed::operator/(const Fixed& obj) const
 {
-    Fixed res;
-    res._fixedPointNum = this->_fixedPointNum / obj._fixedPointNum;
-    return res;
+    if (obj._fixedPointNum == 0)
+    {
+        std::cout << "Error: Cannot divide by 0" << std::endl;
+        return Fixed(0);
+    }
+    return Fixed(this->toFloat() / obj.toFloat());
 }
 
-Fixed    operator*(const Fixed& obj) const
+Fixed    Fixed::operator*(const Fixed& obj) const
 {
-    Fixed res;
-    res._fixedPointNum = this->_fixedPointNum * obj._fixedPointNum;
-    return res;
+   return Fixed(this->toFloat() * obj.toFloat());
 }
