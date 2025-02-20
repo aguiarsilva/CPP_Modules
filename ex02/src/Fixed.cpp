@@ -4,18 +4,18 @@
 
 Fixed::Fixed() : _fixedPointNum(0)
 {
-    std::cout << "Default constructor called" << std::endl;
+    //std::cout << "Default constructor called" << std::endl;
 }
 
 Fixed::Fixed(const Fixed& src)
 {
-    std::cout << "Copy constructor called" << std::endl;
+    //std::cout << "Copy constructor called" << std::endl;
     *this = src;
 }
 
 Fixed& Fixed::operator=(const Fixed& other)
 {
-    std::cout << "Copy assignment operator called" << std::endl;
+    //std::cout << "Copy assignment operator called" << std::endl;
     if (this != &other)
         this->_fixedPointNum = other.getRawBits();
     return *this;
@@ -24,18 +24,18 @@ Fixed& Fixed::operator=(const Fixed& other)
 Fixed::Fixed(const int value) 
     : _fixedPointNum(value << _fractionalBitsNum)
 {
-    std::cout << "Int constructor called" << std::endl;
+    //std::cout << "Int constructor called" << std::endl;
 }
 
 Fixed::Fixed(const float value) 
     : _fixedPointNum(static_cast<int>(roundf(value * (1 << _fractionalBitsNum))))
 {
-    std::cout << "Float constructor called" << std::endl;
+    //std::cout << "Float constructor called" << std::endl;
 }
 
 Fixed::~Fixed()
 {
-    std::cout << "Destructor called" << std::endl;
+    //std::cout << "Destructor called" << std::endl;
 }
 
 int Fixed::getRawBits(void) const
@@ -118,4 +118,58 @@ Fixed    Fixed::operator/(const Fixed& obj) const
 Fixed    Fixed::operator*(const Fixed& obj) const
 {
    return Fixed(this->toFloat() * obj.toFloat());
+}
+
+Fixed&    Fixed::operator++()
+{
+    ++_fixedPointNum;
+    return *this;
+}
+
+Fixed&    Fixed::operator--()
+{
+    --_fixedPointNum;
+    return *this;
+}
+
+Fixed    Fixed::operator++(int)
+{
+    Fixed copy = *this;
+    _fixedPointNum++;
+    return copy;
+}
+
+Fixed    Fixed::operator--(int)
+{
+    Fixed copy = *this;
+    _fixedPointNum--;
+    return copy;
+}
+
+Fixed& Fixed::min(Fixed& a, Fixed& b)
+{
+    if (a < b)
+        return a;
+    return b;
+}
+
+const Fixed& Fixed::min(const Fixed& a, const Fixed& b)
+{
+    if (a < b)
+        return a;
+    return b;
+}
+
+Fixed& Fixed::max(Fixed& a, Fixed& b)
+{
+    if (a > b)
+        return a;
+    return b;
+}
+
+const Fixed& Fixed::max(const Fixed& a, const Fixed& b)
+{
+    if (a > b)
+        return a;
+    return b;
 }
