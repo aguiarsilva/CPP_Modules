@@ -20,7 +20,7 @@ ClapTrap::ClapTrap(const ClapTrap& obj)
 ClapTrap& ClapTrap::operator=(const ClapTrap& other)
 {
     std::cout << "Copy assignment operator called" << std::endl;
-    if (*this != &other)
+    if (this != &other)
     {
         this->name = other.name;
         this->hitPoints = other.hitPoints;
@@ -68,7 +68,6 @@ void    ClapTrap::takeDamage(unsigned int amount)
     }
 }
 
-
 void    ClapTrap::beRepaired(unsigned int amount)
 {
     unsigned int amountToHeal;
@@ -88,4 +87,24 @@ void    ClapTrap::beRepaired(unsigned int amount)
         this->hitPoints += amountToHeal;
         std::cout << "ClapTrap " << name << " recovered " << amountToHeal << " hit points!" << std::endl;
     }
+}
+
+std::string getName() const
+{
+    return name;
+}
+
+int     getHitPoints() const
+{
+    return hitPoints;
+}
+
+int     getEnergyPoints() const
+{
+    return energyPoints;
+}
+
+int     getAttackDamage() const
+{
+    return attackDamage;
 }
