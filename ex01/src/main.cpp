@@ -1,4 +1,4 @@
-#include "ClapTrap.hpp"
+#include "ScavTrap.hpp"
 #include "colors.hpp"
 #include <iostream>
 
@@ -6,39 +6,47 @@ int main ()
 {
     //Class construction tests:
     std::cout << GREEN << "Initiating constructor tests" << RESET << std::endl;
+        //ClapTrap with parameter constructor
+    std::cout << GREEN << "Testing constructor with parameter name" << RESET << std::endl;
+    ClapTrap h = ClapTrap("Bob");
+    std::cout << "ClapTrap " << h.getName() << " with " << h.getHitPoints() 
+            << " Hit Points, " << h.getEnergyPoints() 
+            << " Energy Points and " << h.getAttackDamage() 
+            << " Attack Damage created" << std::endl;
+    std::cout << std::endl;
 
-        //ClapTrap with default constructor
+        //ScavTrap with default constructor
     std::cout << "Testing default constructor" << std::endl;
-    ClapTrap a = ClapTrap();
-    std::cout << "ClapTrap " << a.getName() << " with " << a.getHitPoints() 
+    ScavTrap a = ScavTrap();
+    std::cout << "ScavTrap " << a.getName() << " with " << a.getHitPoints() 
             << " Hit Points, " << a.getEnergyPoints() 
             << " Energy Points and " << a.getAttackDamage() 
             << " Attack Damage created" << std::endl;
     std::cout << std::endl;
 
-        //ClapTrap with parameter constructor
+        //ScavTrap with parameter constructor
     std::cout << GREEN << "Testing constructor with parameter name" << RESET << std::endl;
-    ClapTrap b = ClapTrap("Bob");
-    std::cout << "ClapTrap " << b.getName() << " with " << b.getHitPoints() 
+    ScavTrap b = ScavTrap("Robot");
+    std::cout << "ScavTrap " << b.getName() << " with " << b.getHitPoints() 
             << " Hit Points, " << b.getEnergyPoints() 
             << " Energy Points and " << b.getAttackDamage() 
             << " Attack Damage created" << std::endl;
     std::cout << std::endl;
 
-        //ClapTrap copy constructor
+        //ScavTrap copy constructor
     std::cout << GREEN << "Testing copy constructor" << RESET << std::endl;
-    ClapTrap c(b);
-    std::cout << "ClapTrap " << c.getName() << " with " << c.getHitPoints() 
+    ScavTrap c(b);
+    std::cout << "ScavTrap " << c.getName() << " with " << c.getHitPoints() 
             << " Hit Points, " << c.getEnergyPoints() 
             << " Energy Points and " << c.getAttackDamage() 
             << " Attack Damage created" << std::endl;
     std::cout << std::endl;
 
-        //Create new ClapTrap and assing an exist one to it
+        //Create new ScavTrap and assing an exist one to it
     std::cout << GREEN << "Testing assignement operator" << RESET << std::endl;
-    ClapTrap d;
+    ScavTrap d;
     d = a;
-    std::cout << "ClapTrap " << d.getName() << " with " << d.getHitPoints() 
+    std::cout << "ScavTrap " << d.getName() << " with " << d.getHitPoints() 
             << " Hit Points, " << d.getEnergyPoints() 
             << " Energy Points and " << d.getAttackDamage() 
             << " Attack Damage created" << std::endl;
@@ -47,30 +55,31 @@ int main ()
     //Action tests
     std::cout << GREEN << "Starting Action Tests" << RESET << std::endl;
 
-        //ClapTrap attacks someone and the attacked takes different amounts of damage
-    ClapTrap e("Alice");
-    ClapTrap f("Raul");
+        //ScavTrap attacks someone and the attacked takes different amounts of damage
+    ScavTrap e("Alice");
+    ScavTrap f("Raul");
     std::cout << YELLOW << e.getName() << " has " << e.getHitPoints() << " Hit Points" << RESET << std::endl;
     std::cout << RED << f.getName() << " has " << f.getEnergyPoints() << " Energy Points" << RESET << std::endl;
     f.attack("Alice");
-    e.takeDamage(5);
+    e.takeDamage(20);
     std::cout << RED << f.getName() << " has " << f.getEnergyPoints() << " Energy Points" << RESET << std::endl;
     std::cout << YELLOW << e.getName() << " has " << e.getHitPoints() << " Hit Points" << RESET << std::endl;
-    f.attack("Alice");
-    e.takeDamage(6);
+    h.attack("Raul");
+    f.attack("Bob");
+    h.takeDamage(20);
     std::cout << RED << f.getName() << " has " << f.getEnergyPoints() << RESET << std::endl;
     std::cout << YELLOW << e.getName() << " has " << e.getHitPoints() << " Hit Points" << RESET << std::endl;
     std::cout << std::endl;
 
-    //Test if a change in ClapTrap copy doesn't affect the original
+    //Test if a change in ScavTrap copy doesn't affect the original
     std::cout << YELLOW << c.getName() << " has " << c.getHitPoints() << " Hit Points" << RESET << std::endl;
     std::cout << YELLOW << b.getName() << " has " << b.getHitPoints() << " Hit Points" << RESET << std::endl;
-    c.takeDamage(2);
+    c.takeDamage(20);
     std::cout << YELLOW << c.getName() << " has " << c.getHitPoints() << " Hit Points" << RESET << std::endl;
     std::cout << YELLOW << b.getName() << " has " << b.getHitPoints() << " Hit Points" << RESET << std::endl;
     std::cout << std::endl;
 
-    //ClapTrap gets repaired
+    //ScavTrap gets repaired
     c.takeDamage(7);
             //Try different repair amounts
     std::cout << BLUE << c.getName() << " has " << c.getHitPoints() << " Hit Points and " << c.getEnergyPoints() << " Energy Points" << RESET << std::endl;
@@ -78,6 +87,11 @@ int main ()
     std::cout << BLUE << c.getName() << " has " << c.getHitPoints() << " Hit Points and " << c.getEnergyPoints() << " Energy Points" << RESET << std::endl;
     c.beRepaired(8);
     std::cout << BLUE << c.getName() << " has " << c.getHitPoints() << " Hit Points and " << c.getEnergyPoints() << " Energy Points" << RESET << std::endl;
+    std::cout << std::endl;
+
+    //ScavTrap's function guardGate()
+    std::cout << GREEN << "Testing ScavTrap specific guardGate() function" << RESET << std::endl;
+    b.guardGate();
     std::cout << std::endl;
 
 //Edge cases
@@ -94,8 +108,8 @@ int main ()
 
     //Damage until 0 hit points
     std::cout << YELLOW << b.getName() << " has " << b.getHitPoints() << " Hit Points" << RESET << std::endl;
-    b.takeDamage(3);
-    b.takeDamage(7);
+    b.takeDamage(50);
+    b.takeDamage(50);
     std::cout << YELLOW << b.getName() << " has " << b.getHitPoints() << " Hit Points" << RESET << std::endl;
     //Try to attack after 0 hitPoints
     b.attack("Raul");
@@ -103,15 +117,15 @@ int main ()
     b.beRepaired(7);
     std::cout << std::endl;
 
-    //Create a ClapTrap and assign it to itself
+    //Create a ScavTrap and assign it to itself
     std::cout << GREEN << "Self assignement test" << RESET << std::endl;
-    ClapTrap g("Selfie");
-    std::cout << "ClapTrap " << g.getName() << " with " << g.getHitPoints() 
+    ScavTrap g("Selfie");
+    std::cout << "ScavTrap " << g.getName() << " with " << g.getHitPoints() 
             << "Hit Points, " << g.getEnergyPoints() 
             << " Energy Points and " << g.getAttackDamage() 
             << " Attack Damage created" << std::endl;
     g = g; // self-assignement
-    std::cout << "ClapTrap " << g.getName() << " with " << g.getHitPoints() 
+    std::cout << "ScavTrap " << g.getName() << " with " << g.getHitPoints() 
             << "Hit Points, " << g.getEnergyPoints() 
             << " Energy Points and " << g.getAttackDamage() 
             << " Attack Damage created" << std::endl;
@@ -120,14 +134,14 @@ int main ()
     //Test the destructor by letting objects go out of scope
     std::cout << GREEN << "Destructor Test" << RESET << std::endl;
     {
-        ClapTrap temp("inScope");
+        ScavTrap temp("inScope");
         std::cout << "Inside Block: " << temp.getName() << " exists." << std::endl;
     }
     std::cout << "Exited block. inScope should be destroyed above" << std::endl;
     std:: cout << std::endl;
 
     std::cout << GREEN << "Testing destructor with dynamic allocation" << RESET << std::endl;
-    ClapTrap* dynamicTrap = new ClapTrap("HeapTrap");
+    ScavTrap* dynamicTrap = new ScavTrap("HeapTrap");
     delete dynamicTrap;
     std::cout << "HeapTrap deleted" << std::endl;
     std::cout << std::endl;
