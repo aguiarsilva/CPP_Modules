@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   phonebook.cpp                                      :+:      :+:    :+:   */
+/*   Phonebook.cpp                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: baguiar- <baguiar-@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 14:01:08 by baguiar-          #+#    #+#             */
-/*   Updated: 2025/02/06 23:56:11 by baguiar-         ###   ########.fr       */
+/*   Updated: 2025/03/11 13:22:30 by baguiar-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,11 @@ PhoneBook::PhoneBook(void)
 {
     this->index = 0;
     this->totalContacts = 0;
-    return;
 }
 
 PhoneBook::~PhoneBook(void)
 {
     std::cout << RED << "PhoneBook destroyed" << DEFAULT << std::endl;
-    return ;
 }
 
 void PhoneBook::addContact(const Contact& contact)
@@ -40,7 +38,7 @@ void PhoneBook::addContact(const Contact& contact)
     else
     {
         contacts[index] = contact;
-        std::cout << GREEN << "\nContact was added successfully at index " << index << DEFAULT <<std::endl;
+        std::cout << GREEN << "\nContact was added successfully at index 7" << DEFAULT << std::endl;
         std::cout << YELLOW << "Warning: last contact was replaced (phonebook is full)" << DEFAULT << std::endl;
     }
     index = (index + 1) % 8;
@@ -65,8 +63,8 @@ void PhoneBook::searchContact() const
               << std::setw(10) << "First Name" << "|"
               << std::setw(10) << "Last Name" << "|"
               << std::setw(10) << "Nickname" << "|" << std::endl;
-    std::cout << std::setfill('-') << std::setw(44) << "-" << std::endl;
-    std::cout << std::setfill(' ');
+        std::cout << std::setfill('-') << std::setw(44) << "-" << std::endl;
+        std::cout << std::setfill(' ');
 
     for (int i = 0; i < totalContacts; i++)
     {
@@ -97,21 +95,12 @@ void PhoneBook::searchContact() const
 
 void PhoneBook::displayContact(int index) const
 {
-    try
-    {
-        std::cout << "\nContact information:" << std::endl;
-        std::cout << "First Name: " << contacts[index].getFirstName() << std::endl;
-        std::cout << "Last Name: " << contacts[index].getLastName() << std::endl;
-        std::cout << "Nickname: " << contacts[index].getNickName() << std::endl;
-        std::cout << "Phone Number: " << contacts[index].getPhoneNumber() << std::endl;
-        std::cout << "Darkest Secret: " << contacts[index].getDarkestSecret() << std::endl;
-    }
-    catch (const std::exception& e)
-    {
-        std::cout << "Error displaying contact: " << e.what() << std::endl;
-    }
-
-    
+    std::cout << "\nContact information:" << std::endl;
+    std::cout << "First Name: " << contacts[index].getFirstName() << std::endl;
+    std::cout << "Last Name: " << contacts[index].getLastName() << std::endl;
+    std::cout << "Nickname: " << contacts[index].getNickName() << std::endl;
+    std::cout << "Phone Number: " << contacts[index].getPhoneNumber() << std::endl;
+    std::cout << "Darkest Secret: " << contacts[index].getDarkestSecret() << std::endl;
 }
 
 std::string PhoneBook::truncateString(std::string str) const

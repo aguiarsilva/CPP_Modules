@@ -6,7 +6,7 @@
 #    By: baguiar- <baguiar-@student.42wolfsburg.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/14 13:35:37 by baguiar-          #+#    #+#              #
-#    Updated: 2025/02/06 22:25:44 by baguiar-         ###   ########.fr        #
+#    Updated: 2025/03/11 11:41:25 by baguiar-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,9 +16,9 @@ CC = c++
 CPPFLAGS = -std=c++98 -Wall -Wextra -Werror
 RM = rm -f
 
-SRC = contacts.cpp \
+SRC = Contacts.cpp \
 	  main.cpp \
-	  phonebook.cpp
+	  Phonebook.cpp
 
 OBJ = $(SRC:.cpp=.o)
 
@@ -27,7 +27,7 @@ all: $(NAME)
 $(NAME): $(OBJ)
 	$(CC) $(CPPFLAGS) $(OBJ) -o $(NAME)
 
-%.o: %..cpp
+%.o: %.cpp
 	$(CC) $(CPPFLAGS) -c $< -o $@
 
 clean:
@@ -38,4 +38,7 @@ fclean: clean
 
 re: fclean $(NAME)
 
-.PHONY: all clean fclean re
+valgrind: $(NAME)
+	valgrind --leak-check=full ./$(NAME)
+
+.PHONY: all clean fclean re valgrind
