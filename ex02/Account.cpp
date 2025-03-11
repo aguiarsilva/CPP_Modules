@@ -63,8 +63,8 @@ Account::Account(int initial_deposit)
 	_displayTimestamp();
 
 	std::cout <<
-			"index:" << this->_accountIndex << ";" <<
-			"amount:" << this->_amount << ";" <<
+			"index:" << _accountIndex << ";" <<
+			"amount:" << _amount << ";" <<
 			"created" << std::endl;
 }
 
@@ -149,9 +149,9 @@ void	Account::displayStatus( void ) const
 	_displayTimestamp();
 	std::cout <<
 			"index:" << this->_accountIndex << ";" <<
-			"amount:" << this->_amount << ";" <<
-			"deposits:" << this->_nbDeposits << ";" <<
-			"withdrawals:" << this->_nbWithdrawals << std::endl;
+			"amount:" << this->_totalAmount << ";" <<
+			"deposits:" << this->_totalNbDeposits << ";" <<
+			"withdrawals:" << this->_totalNbWithdrawals << std::endl;
 
 }
 
@@ -167,5 +167,6 @@ void	Account::_displayTimestamp( void )
 	std::strftime(timestamp, sizeof(timestamp), "%Y%m%d_%H%M%S", std::localtime(&time_now));
 
 	std::cout << "[" << timestamp << "] ";
+
 }
 
