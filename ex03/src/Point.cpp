@@ -12,17 +12,17 @@
 
 #include "Point.hpp"
 
-Point::Point() : x(0), y(0)
+Point::Point() : m_x(0), m_y(0)
 {
 
 }
 
-Point::Point(float x, float y) : x(x), y(y)
+Point::Point(float x, float y) : m_x(x), m_y(y)
 {
 
 }
 
-Point::Point(Point const& src) : x(src.x), y(src.y)
+Point::Point(Point const& src) : m_x(src.m_x), m_y(src.m_y)
 {
 
 }
@@ -40,10 +40,10 @@ Point& Point::operator=(Point const& obj)
 
 const Fixed Point::getX() const
 {
-    return (this->x);
+    return (this->m_x);
 }
 
 const Fixed Point::getY() const
 {
-    return (this->y);
+    return (this->m_y);
 }

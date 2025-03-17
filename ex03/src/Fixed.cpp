@@ -14,7 +14,7 @@
 #include <iostream>
 #include <cmath>
 
-Fixed::Fixed() : _fixedPointNum(0)
+Fixed::Fixed() : m_fixedPtNum(0)
 {
     //std::cout << "Default constructor called" << std::endl;
 }
@@ -29,18 +29,18 @@ Fixed& Fixed::operator=(const Fixed& other)
 {
     //std::cout << "Copy assignment operator called" << std::endl;
     if (this != &other)
-        this->_fixedPointNum = other.getRawBits();
+        this->m_fixedPtNum = other.getRawBits();
     return *this;
 }
 
 Fixed::Fixed(const int value) 
-    : _fixedPointNum(value << _fractionalBitsNum)
+    : m_fixedPtNum(value << m_fractBitsNum)
 {
     //std::cout << "Int constructor called" << std::endl;
 }
 
 Fixed::Fixed(const float value) 
-    : _fixedPointNum(static_cast<int>(roundf(value * (1 << _fractionalBitsNum))))
+    : m_fixedPtNum(static_cast<int>(roundf(value * (1 << m_fractBitsNum))))
 {
     //std::cout << "Float constructor called" << std::endl;
 }
@@ -53,22 +53,22 @@ Fixed::~Fixed()
 int Fixed::getRawBits(void) const
 {
     //std::cout << "getRawBits member function called" << std::endl;
-    return this->_fixedPointNum;
+    return this->m_fixedPtNum;
 }
 
 void Fixed::setRawBits(int const raw)
 {
-    this->_fixedPointNum = raw;
+    this->m_fixedPtNum = raw;
 }
 
 float   Fixed::toFloat(void) const
 {
-    return static_cast<float>(_fixedPointNum) / (1 << _fractionalBitsNum);
+    return static_cast<float>(m_fixedPtNum) / (1 << m_fractBitsNum);
 }
 
 int     Fixed::toInt(void) const
 {
-    return _fixedPointNum >> _fractionalBitsNum;
+    return m_fixedPtNum >> m_fractBitsNum;
 }
 
 std::ostream& operator<<(std::ostream& output, const Fixed& src)
@@ -79,32 +79,32 @@ std::ostream& operator<<(std::ostream& output, const Fixed& src)
 
 bool    Fixed::operator<(const Fixed& obj) const
 {
-    return this->_fixedPointNum < obj._fixedPointNum;
+    return this->m_fixedPtNum < obj.m_fixedPtNum;
 }
 
 bool    Fixed::operator>(const Fixed& obj) const
 {
-    return this->_fixedPointNum > obj._fixedPointNum;
+    return this->m_fixedPtNum > obj.m_fixedPtNum;
 }
 
 bool    Fixed::operator<=(const Fixed& obj) const
 {
-    return this->_fixedPointNum <= obj._fixedPointNum;
+    return this->m_fixedPtNum <= obj.m_fixedPtNum;
 }
 
 bool    Fixed::operator>=(const Fixed& obj) const
 {
-    return this->_fixedPointNum >= obj._fixedPointNum;
+    return this->m_fixedPtNum >= obj.m_fixedPtNum;
 }
 
 bool    Fixed::operator==(const Fixed& obj) const
 {
-    return this->_fixedPointNum == obj._fixedPointNum;
+    return this->m_fixedPtNum == obj.m_fixedPtNum;
 }
 
 bool    Fixed::operator!=(const Fixed& obj) const
 {
-    return this->_fixedPointNum != obj._fixedPointNum;
+    return this->m_fixedPtNum != obj.m_fixedPtNum;
 }
 
 Fixed    Fixed::operator+(const Fixed& obj) const
@@ -119,7 +119,7 @@ Fixed    Fixed::operator-(const Fixed& obj) const
 
 Fixed    Fixed::operator/(const Fixed& obj) const
 {
-    if (obj._fixedPointNum == 0)
+    if (obj.m_fixedPtNum == 0)
     {
         std::cout << "Error: Cannot divide by 0" << std::endl;
         return Fixed(0);
@@ -134,27 +134,27 @@ Fixed    Fixed::operator*(const Fixed& obj) const
 
 Fixed&    Fixed::operator++()
 {
-    ++_fixedPointNum;
+    ++m_fixedPtNum;
     return *this;
 }
 
 Fixed&    Fixed::operator--()
 {
-    --_fixedPointNum;
+    --m_fixedPtNum;
     return *this;
 }
 
 Fixed    Fixed::operator++(int)
 {
     Fixed copy = *this;
-    _fixedPointNum++;
+    m_fixedPtNum++;
     return copy;
 }
 
 Fixed    Fixed::operator--(int)
 {
     Fixed copy = *this;
-    _fixedPointNum--;
+    m_fixedPtNum--;
     return copy;
 }
 
