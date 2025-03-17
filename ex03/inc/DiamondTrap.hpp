@@ -1,7 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   DiamondTrap.hpp                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: baguiar- <baguiar-@student.42wolfsburg.de  +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/03/17 15:13:21 by baguiar-          #+#    #+#             */
+/*   Updated: 2025/03/17 15:14:21 by baguiar-         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef DIAMONDTRAP_HPP
 # define DIAMONDTRAP_HPP
 
-#include "ClapTrap.hpp"
 #include "ScavTrap.hpp"
 #include "FragTrap.hpp"
 #include <string>
