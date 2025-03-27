@@ -1,3 +1,8 @@
+#include <iostream>
+#include "Animal.hpp"
+#include "Cat.hpp"
+#include "Dog.hpp"
+
 int main()
 {
 
@@ -10,7 +15,6 @@ int main()
     cat1->makeSound();
     dog1->makeSound();
     generic->makeSound();
-    ...
 
     return 0;
 }

@@ -8,7 +8,9 @@ OBJ_DIR = obj/
 INC_DIR = inc/
 
 SRC = main.cpp \
-	  Animal.cpp
+	  Animal.cpp \
+	  Cat.cpp \
+	  Dog.cpp
 
 OBJ = $(addprefix $(OBJ_DIR), $(SRC:.cpp=.o))
 

@@ -7,7 +7,7 @@ Dog::Dog()
 	m_type = "Dog";
 }
 
-Dog::Dog(const Dog& obj)
+Dog::Dog(const Dog& obj) : Animal(obj)
 {
 	std::cout << "Dog copy constructor called" << std::endl;
 	*this = obj;
@@ -26,7 +26,7 @@ Dog& Dog::operator=(const Dog& other)
 	return *this;
 }
 
-void	Dog::makeSound()
+void	Dog::makeSound() const
 {
 	std::cout << "Woof!" << std::endl;
 }
