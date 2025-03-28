@@ -29,6 +29,11 @@ int main()
     cat1->makeSound();
     dog1->makeSound();
     generic->makeSound();
+
+    delete generic;
+    delete dog1;
+    delete cat1;
+
     std::cout << std::endl;
 
     //Testing WrongAnimal
@@ -40,6 +45,10 @@ int main()
     std::cout << wrongCat->getType() << " " << std::endl;
     wrongCat->makeSound();
     wrongGeneric->makeSound();
+
+    delete wrongGeneric;
+    delete wrongCat;
+
     std::cout << std::endl;
 
     return 0;
