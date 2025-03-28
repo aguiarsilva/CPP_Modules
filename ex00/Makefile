@@ -1,3 +1,15 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: baguiar- <baguiar-@student.42wolfsburg.de  +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2025/03/28 09:15:36 by baguiar-          #+#    #+#              #
+#    Updated: 2025/03/28 09:15:39 by baguiar-         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
 NAME = polymorphism 
 
 CC = c++
@@ -10,7 +22,9 @@ INC_DIR = inc/
 SRC = main.cpp \
 	  Animal.cpp \
 	  Cat.cpp \
-	  Dog.cpp
+	  Dog.cpp \
+	  WrongCat.cpp \
+	  WrongAnimal.cpp
 
 OBJ = $(addprefix $(OBJ_DIR), $(SRC:.cpp=.o))
 

@@ -1,7 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.cpp                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: baguiar- <baguiar-@student.42wolfsburg.de  +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/03/28 09:15:14 by baguiar-          #+#    #+#             */
+/*   Updated: 2025/03/28 09:15:17 by baguiar-         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <iostream>
-#include "Animal.hpp"
-#include "Cat.hpp"
-#include "Dog.hpp"
+#include "../inc/Animal.hpp"
+#include "../inc/Cat.hpp"
+#include "../inc/Dog.hpp"
+#include "../inc/WrongAnimal.hpp"
+#include "../inc/WrongCat.hpp"
 
 int main()
 {
@@ -15,6 +29,18 @@ int main()
     cat1->makeSound();
     dog1->makeSound();
     generic->makeSound();
+    std::cout << std::endl;
+
+    //Testing WrongAnimal
+    std::cout << "Testing WrongAnimal" << std::endl;
+    
+    const WrongAnimal* wrongGeneric = new WrongAnimal();
+    const WrongAnimal* wrongCat = new WrongCat();
+
+    std::cout << wrongCat->getType() << " " << std::endl;
+    wrongCat->makeSound();
+    wrongGeneric->makeSound();
+    std::cout << std::endl;
 
     return 0;
 }
