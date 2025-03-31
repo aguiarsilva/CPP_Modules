@@ -6,7 +6,7 @@
 /*   By: baguiar- <baguiar-@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/28 09:14:50 by baguiar-          #+#    #+#             */
-/*   Updated: 2025/03/31 10:49:48 by baguiar-         ###   ########.fr       */
+/*   Updated: 2025/03/31 10:16:37 by baguiar-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,4 @@ Animal& Animal::operator=(const Animal& other)
 std::string     Animal::getType() const 
 {
     return m_type;
-}
-
-void    Animal::makeSound() const
-{
-    std::cout << "Generic animal sound" << std::endl;
 }
