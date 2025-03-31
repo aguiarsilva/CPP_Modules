@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Cat.hpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: baguiar- <baguiar-@student.42wolfsburg.de  +#+  +:+       +#+        */
+/*   By: baguiar- <baguiar-@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/28 09:14:19 by baguiar-          #+#    #+#             */
-/*   Updated: 2025/03/31 09:25:30 by baguiar-         ###   ########.fr       */
+/*   Updated: 2025/03/31 10:13:47 by baguiar-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ class Cat : public Animal
 		~Cat();
 		Cat& operator=(const Cat& other);
 		virtual void	makeSound() const;
-        Brain  getBrain() const;
+        Brain*  getBrain() const;
 	private:
         Brain* _brain;
 	

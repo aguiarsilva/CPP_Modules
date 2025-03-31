@@ -19,17 +19,10 @@
 int main()
 {
     std::cout << "Testing old classes" << std::endl;
-    const Animal* dog1 = new Dog();
-    const Animal* cat1 = new Cat();
-
-    std::cout << dog1->getType() << " " << std::endl;
-    std::cout << cat1->getType() << " " << std::endl;
-    cat1->makeSound();
-    dog1->makeSound();
-
-    delete dog1;
-    delete cat1;
-
+    const Animal* j = new Dog();
+    const Animal* i = new Cat();
+    delete j;
+    delete i;
     std::cout << std::endl;
 
     std::cout << "Testing Brain class" << std::endl;
@@ -39,7 +32,7 @@ int main()
 
     for (int i = 0; i < arr_size/2; i++)
         animals[i] = new Dog();
-    for (int i = 0; i < arr_size/2; i++)
+    for (int i = arr_size/2; i < arr_size; i++)
         animals[i] = new Cat();
 
     for (int i = 0; i < arr_size; i++)

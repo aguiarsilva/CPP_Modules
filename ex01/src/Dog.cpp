@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "../inc/Dog.hpp"
+#include "../inc/Brain.hpp"
 #include <iostream>
 
 Dog::Dog()
@@ -49,7 +50,7 @@ void	Dog::makeSound() const
 	std::cout << "Woof!" << std::endl;
 }
 
-Brain    Dog::getBrain() const
+Brain*   Dog::getBrain() const
 {
     return _brain;
 }

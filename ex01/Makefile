@@ -1,3 +1,15 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: baguiar- <baguiar-@student.42wolfsburg.    +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2025/03/31 10:23:28 by baguiar-          #+#    #+#              #
+#    Updated: 2025/03/31 10:23:28 by baguiar-         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
 NAME = brain
 
 CC = c++
@@ -11,8 +23,7 @@ SRC = main.cpp \
 	  Animal.cpp \
 	  Cat.cpp \
 	  Dog.cpp \
-	  WrongCat.cpp \
-	  WrongAnimal.cpp
+	  Brain.cpp
 
 OBJ = $(addprefix $(OBJ_DIR), $(SRC:.cpp=.o))
 
