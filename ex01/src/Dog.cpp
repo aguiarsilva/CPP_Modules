@@ -6,7 +6,7 @@
 /*   By: baguiar- <baguiar-@student.42wolfsburg.de  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/28 09:15:05 by baguiar-          #+#    #+#             */
-/*   Updated: 2025/03/30 22:33:41 by baguiar-         ###   ########.fr       */
+/*   Updated: 2025/03/31 09:23:43 by baguiar-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,4 +47,9 @@ Dog& Dog::operator=(const Dog& other)
 void	Dog::makeSound() const
 {
 	std::cout << "Woof!" << std::endl;
+}
+
+Brain    Dog::getBrain() const
+{
+    return _brain;
 }

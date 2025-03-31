@@ -6,7 +6,7 @@
 /*   By: baguiar- <baguiar-@student.42wolfsburg.de  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/28 09:14:26 by baguiar-          #+#    #+#             */
-/*   Updated: 2025/03/30 15:15:21 by baguiar-         ###   ########.fr       */
+/*   Updated: 2025/03/31 09:23:26 by baguiar-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ class Dog : public Animal
 		~Dog();
 		Dog& operator=(const Dog& other);
 		virtual void	makeSound() const;
+        Brain    getBrain() const;
 
 	private:
         Brain* _brain;

@@ -6,7 +6,7 @@
 /*   By: baguiar- <baguiar-@student.42wolfsburg.de  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/28 09:14:59 by baguiar-          #+#    #+#             */
-/*   Updated: 2025/03/30 23:20:01 by baguiar-         ###   ########.fr       */
+/*   Updated: 2025/03/31 09:22:47 by baguiar-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,4 +48,9 @@ Cat& Cat::operator=(const Cat& other)
 void	Cat::makeSound() const
 {
 	std::cout << "Meow!" << std::endl;
+}
+
+Brain  Cat::getBrain() const
+{
+    return _brain;
 }
