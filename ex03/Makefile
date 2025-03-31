@@ -5,12 +5,12 @@
 #                                                     +:+ +:+         +:+      #
 #    By: baguiar- <baguiar-@student.42wolfsburg.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2025/03/31 10:52:26 by baguiar-          #+#    #+#              #
-#    Updated: 2025/03/31 10:52:28 by baguiar-         ###   ########.fr        #
+#    Created: 2025/03/31 10:52:42 by baguiar-          #+#    #+#              #
+#    Updated: 2025/03/31 10:52:43 by baguiar-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = abstract
+NAME = interface
 
 CC = c++
 CPPFLAGS = -std=c++98 -Wall -Wextra -Werror
@@ -20,10 +20,6 @@ OBJ_DIR = obj/
 INC_DIR = inc/
 
 SRC = main.cpp \
-	  Animal.cpp \
-	  Cat.cpp \
-	  Dog.cpp \
-	  Brain.cpp
 
 OBJ = $(addprefix $(OBJ_DIR), $(SRC:.cpp=.o))
 
