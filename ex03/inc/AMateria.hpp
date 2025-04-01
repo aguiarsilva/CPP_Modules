@@ -6,7 +6,7 @@
 /*   By: baguiar- <baguiar-@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/31 11:18:42 by baguiar-          #+#    #+#             */
-/*   Updated: 2025/03/31 11:48:37 by baguiar-         ###   ########.fr       */
+/*   Updated: 2025/04/01 08:42:43 by baguiar-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define AMATERIA_HPP
 
 #include <string>
-#include "../inc/ICharachter.hpp"
+class ICharacter;
 
 class AMateria
 {
@@ -24,6 +24,7 @@ class AMateria
 	public:
 		AMateria();
 		AMateria(std::string const &type);
+		AMateria(const AMateria& other);
 		AMateria& operator=(const AMateria& other);
 		virtual ~AMateria();
 		

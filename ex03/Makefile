@@ -6,7 +6,7 @@
 #    By: baguiar- <baguiar-@student.42wolfsburg.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/03/31 10:52:42 by baguiar-          #+#    #+#              #
-#    Updated: 2025/03/31 10:52:43 by baguiar-         ###   ########.fr        #
+#    Updated: 2025/04/01 08:47:25 by baguiar-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,6 +20,10 @@ OBJ_DIR = obj/
 INC_DIR = inc/
 
 SRC = main.cpp \
+	  AMateria.cpp \
+	  Character.cpp \
+	  Ice.cpp \
+	  Cure.cpp
 
 OBJ = $(addprefix $(OBJ_DIR), $(SRC:.cpp=.o))
 
