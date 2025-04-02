@@ -37,7 +37,7 @@
             return *this;
         }
 
-		virtual AMateria::~AMateria()
+		AMateria::~AMateria()
         {
             std::cout << "AMateria destructor called" << std::endl;
         }
