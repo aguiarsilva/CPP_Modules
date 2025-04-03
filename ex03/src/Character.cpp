@@ -95,10 +95,12 @@ void Character::equip(AMateria* m)
 
 void Character::unequip(int idx)
 {
-
+    if (idx >= 0 && idx < 4 && m_inventory[i] != NULL)
+        m_inventory[idx] = NULL;
 }
 
 void Character::use(int idx, ICharacter& target)
 {
-
+    if (idx >= 0 && idx < 4 && m_inventory[i] != NULL)
+        m_inventory[idx]->use(target);
 }
