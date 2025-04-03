@@ -13,23 +13,23 @@
 #include "Character.hpp"
 #include <iostream>
 
-Character::Character() : m_name("");
+Character::Character() : m_name("")
 {
-    std::cout << "Character default constructor called" << std::endl;
+    //std::cout << "Character default constructor called" << std::endl;
     for (int i = 0; i < 4; i++)
         m_inventory[i] = NULL;
 }
 
 Character::Character(std::string const& name) : m_name(name)
 {
-    std::cout << "Character parameter constructor called" << std::endl;
+    //std::cout << "Character parameter constructor called" << std::endl;
     for (int i = 0; i < 4; i++)
         m_inventory[i] = NULL;
 }
 
-Character::Character(const Character& obj) : m_name(obj.name)
+Character::Character(const Character& obj) : m_name(obj.m_name)
 {
-    std::cout << "Character copy constructor called" << std::endl;
+    //std::cout << "Character copy constructor called" << std::endl;
     for (int i = 0; i < 4; i++)
         m_inventory[i] = NULL;
 
@@ -42,7 +42,7 @@ Character::Character(const Character& obj) : m_name(obj.name)
 
 Character& Character::operator=(const Character& other)
 {
-    std::cout << "Character assingment operator called" << std::endl;
+    //std::cout << "Character assingment operator called" << std::endl;
     if (this != &other)
     {
         for (int i = 0; i < 4; i++)
@@ -65,7 +65,7 @@ Character& Character::operator=(const Character& other)
 
 Character::~Character()
 {
-    std::cout << "Character destructor called" << std::endl;
+    //std::cout << "Character destructor called" << std::endl;
     for (int i = 0; i < 4; i++)
     {
         if (m_inventory[i])
@@ -95,12 +95,12 @@ void Character::equip(AMateria* m)
 
 void Character::unequip(int idx)
 {
-    if (idx >= 0 && idx < 4 && m_inventory[i] != NULL)
+    if (idx >= 0 && idx < 4 && m_inventory[idx] != NULL)
         m_inventory[idx] = NULL;
 }
 
 void Character::use(int idx, ICharacter& target)
 {
-    if (idx >= 0 && idx < 4 && m_inventory[i] != NULL)
+    if (idx >= 0 && idx < 4 && m_inventory[idx] != NULL)
         m_inventory[idx]->use(target);
 }

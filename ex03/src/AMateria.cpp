@@ -16,22 +16,22 @@
 
 		AMateria::AMateria() : m_type("")
         {
-            std::cout << "AMateria default constructor called" << std::endl;
+            //std::cout << "AMateria default constructor called" << std::endl;
         }
 
 		AMateria::AMateria(std::string const &type) : m_type(type)
         {
-            std::cout << "AMateria parameter constructor called" << std::endl;
+            //std::cout << "AMateria parameter constructor called" << std::endl;
         }
 
 		AMateria::AMateria(const AMateria& other) : m_type(other.m_type)
         {
-            std::cout << "AMateria copy constructor called" << std::endl;
+            //std::cout << "AMateria copy constructor called" << std::endl;
         }
 
 		AMateria& AMateria::operator=(const AMateria& other)
         {
-            std::cout << "AMateria assingment operator called" << std::endl;
+           //std::cout << "AMateria assingment operator called" << std::endl;
             if (this != &other)
                 this->m_type = other.m_type;
             return *this;
@@ -39,7 +39,7 @@
 
 		AMateria::~AMateria()
         {
-            std::cout << "AMateria destructor called" << std::endl;
+            //std::cout << "AMateria destructor called" << std::endl;
         }
 		
 		std::string const& AMateria::getType() const
