@@ -6,7 +6,7 @@
 /*   By: baguiar- <baguiar-@student.42wolfsburg.de  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 17:06:29 by baguiar-          #+#    #+#             */
-/*   Updated: 2025/05/15 12:05:58 by baguiar-         ###   ########.fr       */
+/*   Updated: 2025/05/15 12:12:22 by baguiar-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ int main()
 	try
 	{
 		//Test increment beyond max
-		std::cout << "\nTest: incrementing bureaucrat grade over the max (1)" std::endl;
+		std::cout << "\nTest: incrementing bureaucrat grade over the max (1)" << std::endl;
 		Bureaucrat caesar("Caesar", 1);
 		std::cout << caesar << std::endl;
 		caesar.incrementGrade();
@@ -71,10 +71,10 @@ int main()
 	try
 	{
 		//Test decrement beyond max
-		std::cout << "\nTest: decrementing bureaucrat grade over the min (150)" std::endl;
+		std::cout << "\nTest: decrementing bureaucrat grade over the min (150)"<< std::endl;
 		Bureaucrat nero("Nero", 150);
 		std::cout << nero << std::endl;
-		caesar.decrementGrade();
+		nero.decrementGrade();
 	}
 	catch(std::exception& e)
 	{
