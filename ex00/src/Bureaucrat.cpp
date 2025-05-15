@@ -6,7 +6,7 @@
 /*   By: baguiar- <baguiar-@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 17:05:52 by baguiar-          #+#    #+#             */
-/*   Updated: 2025/05/15 11:44:25 by baguiar-         ###   ########.fr       */
+/*   Updated: 2025/05/15 12:27:03 by baguiar-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,6 @@ const char* Bureaucrat::GradeTooLowException::what() const throw()
 //Overloaded insertion operator
 std::ostream& operator<<(std::ostream& os, const Bureaucrat& bureaucrat)
 {
-	os << "Bureaucrat: " << bureaucrat.getName() << " , grade: " << bureaucrat.getGrade();
+	os << bureaucrat.getName() << ", bureaucrat grade " << bureaucrat.getGrade();
 	return os;
 }
