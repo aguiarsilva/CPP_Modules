@@ -6,7 +6,7 @@
 /*   By: baguiar- <baguiar-@student.42wolfsburg.de  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 17:06:29 by baguiar-          #+#    #+#             */
-/*   Updated: 2025/05/15 12:12:22 by baguiar-         ###   ########.fr       */
+/*   Updated: 2025/05/16 13:55:34 by baguiar-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,24 +17,39 @@ int main()
 	//Test 1
 	try 
 	{
-		//Test a valid bureaucrat
-		std::cout << "Test: Bureaucrat with valid grade" << std::endl;
-		Bureaucrat pepe("Pepe", 3);
+		//Create the Bureaucrat
+		std::cout << "Creating the Bureaucrat for the Form tests" << std::endl;
+		Bureaucrat pepe("Pepe", 50);
 		std::cout << pepe << std::endl;
 
-		//Test the increment function
-		std::cout << "\nIncrementing grade" << std::endl;
-		pepe.incrementGrade();
-		std::cout << pepe << std::endl;
+		//Create forms with different requirements to test
+		std::cout << "\nCreating Forms for tests" << std::endl;
+		Form firstLevel("Simple Authorization", 130, 130);
+		Form secondLevel("Standard Contract", 50, 30);
+		Form thirdLevel("Top Secret Document", 10, 5);
 
-		//Test the decrement function		
-		std::cout << "\nDecrementing grade" << std::endl;
-		pepe.decrementGrade();
-		std::cout << pepe << std::endl;
+		std::cout << "\n-- Form Information --" << std::endl;
+		std::cout << firstLevel << std::endl;
+		std::cout << secondLevel << std::endl;
+		std::cout << thirdLevel << std::endl;
 
-		//Test Grade too high
-		std::cout << "\nTest: Bureaucrat with too high grade" << std::endl;
-		Bureaucrat marge("Marge", 0);
+		//Test the signing process
+		std::cout << "\n-- Signing Forms --" << std::endl;
+		//Bureaucrat should be able to sign first level form
+		pepe.signForm(firstLevel);
+		std::cout << firstLevel << std::endl;
+
+		//Bureaucrat should be able to sign second level form
+		pepe.signForm(secondLevel);
+		std::cout << secondLevel << std::endl;
+
+		//Bureaucrat should not be able to sign third level form
+		pepe.signForm(thirdLevel);
+		std::cout << thirdLevel << std::endl;
+
+		//Test high/low grades in form creation
+		std::cout << "\n-- Testing Invalid Form Grades --" << std::endl;
+		Form invalidForm("Invalid", 0, 50);
 	}
 	catch (std::exception& e)
 	{
@@ -44,39 +59,9 @@ int main()
 	//Test 2
 	try
 	{
-		//Test Grade too low
-		std::cout << "\nTest: Bureaucrat with too low grade" << std::endl;
-		Bureaucrat charlie("Charlie", 151);
+		Form invalidForm("Invalid", 50, 151);
 	}
 	catch (std::exception& e)
-	{
-		std::cout << e.what() << std::endl;
-	}
-
-	//Test 3
-	try
-	{
-		//Test increment beyond max
-		std::cout << "\nTest: incrementing bureaucrat grade over the max (1)" << std::endl;
-		Bureaucrat caesar("Caesar", 1);
-		std::cout << caesar << std::endl;
-		caesar.incrementGrade();
-	}
-	catch(std::exception& e)
-	{
-		std::cout << e.what() << std::endl;
-	}
-
-	//Test 4	
-	try
-	{
-		//Test decrement beyond max
-		std::cout << "\nTest: decrementing bureaucrat grade over the min (150)"<< std::endl;
-		Bureaucrat nero("Nero", 150);
-		std::cout << nero << std::endl;
-		nero.decrementGrade();
-	}
-	catch(std::exception& e)
 	{
 		std::cout << e.what() << std::endl;
 	}
