@@ -6,7 +6,7 @@
 /*   By: baguiar- <baguiar-@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 12:30:48 by baguiar-          #+#    #+#             */
-/*   Updated: 2025/05/19 13:24:44 by baguiar-         ###   ########.fr       */
+/*   Updated: 2025/05/20 15:58:24 by baguiar-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,9 @@ AForm::AForm(const std::string& name, int gradeToSign, int gradeToExecute) : m_n
 	std::cout << "AForm parametrized constructor called" << std::endl;
 
 	if (gradeToSign < 1 || gradeToExecute < 1)
-		throw Form::GradeTooHighException();
+		throw AForm::GradeTooHighException();
 	if (gradeToSign > 150 || gradeToExecute > 150)
-		throw Form::GradeTooLowException();
+		throw AForm::GradeTooLowException();
 }
 
 AForm::AForm(const AForm& obj) : m_name(obj.m_name), m_signed(obj.m_signed), m_grade_s(obj.m_grade_s), m_grade_e(obj.m_grade_e)
@@ -71,7 +71,7 @@ int AForm::getGradeExec() const
 void AForm::beSigned(const Bureaucrat& bureaucrat)
 {
 	if (bureaucrat.getGrade() > m_grade_s)
-		throw Form::GradeTooLowException();
+		throw AForm::GradeTooLowException();
 	m_signed = true;
 }
 

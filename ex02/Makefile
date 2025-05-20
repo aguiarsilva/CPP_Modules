@@ -6,7 +6,7 @@
 #    By: baguiar- <baguiar-@student.42wolfsburg.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/15 17:14:24 by baguiar-          #+#    #+#              #
-#    Updated: 2025/04/15 17:14:24 by baguiar-         ###   ########.fr        #
+#    Updated: 2025/05/20 15:56:33 by baguiar-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,10 @@ INC_DIR = inc/
 
 SRC = main.cpp \
 	  Bureaucrat.cpp \
-	  Form.cpp
+	  AForm.cpp \
+	  ShrubberyCreationForm.cpp \
+	  RobotomyRequestForm.cpp \
+	  PresidentialPardonForm.cpp
 
 OBJ = $(addprefix $(OBJ_DIR), $(SRC:.cpp=.o))
 

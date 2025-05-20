@@ -6,7 +6,7 @@
 /*   By: baguiar- <baguiar-@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 18:58:36 by baguiar-          #+#    #+#             */
-/*   Updated: 2025/05/19 19:14:33 by baguiar-         ###   ########.fr       */
+/*   Updated: 2025/05/20 16:05:29 by baguiar-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ PresidentialPardonForm::PresidentialPardonForm(const PresidentialPardonForm& obj
 	std::cout << "PresidentialPardonForm copy constructor called" << std::endl;
 }
 
-PresidentialPardonForm::PresidentialPardonForm& operator=(const PresidentialPardonForm& other)
+PresidentialPardonForm& PresidentialPardonForm::operator=(const PresidentialPardonForm& other)
 {
 	std::cout << "PresidentialPardonForm copy assignment operator called" << std::endl;
 	if (this != &other)
@@ -50,7 +50,7 @@ void PresidentialPardonForm::execute(Bureaucrat const& executor) const
 	if (!this->isSigned())
 		throw AForm::NotSignedException();
 
-	if (execute.getGrade() > this->getGradeExec())
+	if (executor.getGrade() > this->getGradeExec())
 		throw AForm::GradeTooLowException();
 	else
 		std::cout << m_target << " has been pardoned by Zaphod Beeblebrox." << std::endl;

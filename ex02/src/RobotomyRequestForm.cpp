@@ -6,7 +6,7 @@
 /*   By: baguiar- <baguiar-@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 14:59:53 by baguiar-          #+#    #+#             */
-/*   Updated: 2025/05/19 15:18:12 by baguiar-         ###   ########.fr       */
+/*   Updated: 2025/05/20 15:59:54 by baguiar-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void RobotomyRequestForm::execute(Bureaucrat const& executor) const
 	std::cout << "* DRILLING NOISES * Bzzzz... Whirrrr... Clank! Clank! Pow! Pow!" << std::endl;
 
 	//generates random number of seeds
-	std::srand(static_cast<unsigned_int>(std::time(NULL)));
+	std::srand(static_cast<unsigned int>(std::time(NULL)));
 
 	if (std::rand() % 2)
 	{
