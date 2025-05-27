@@ -60,7 +60,10 @@ MateriaSource::~MateriaSource()
     for (int i = 0; i < 4; i++)
     {
         if (m_templates[i])
+        {
             delete m_templates[i];
+            m_templates[i] = NULL;
+        }
     }
 }
 
@@ -78,6 +81,7 @@ void MateriaSource::learnMateria(AMateria* m)
             return; 
         }
     }
+    delete m;
     std::cout << "No more available slots for new Materia" << std::endl;
 }
 

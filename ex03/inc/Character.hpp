@@ -28,11 +28,13 @@ class Character : public ICharacter
         std::string const& getName() const;
         void equip(AMateria* m);
         void unequip(int idx);
+        static void cleanFloor();
         void use(int idx, ICharacter& target);
     private:
         std::string m_name;
         AMateria* m_inventory[4];
-    
+        static AMateria* m_floor[1000];
+        static int m_floorCount;
 };
 
 #endif
