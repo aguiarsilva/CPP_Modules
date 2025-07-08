@@ -8,7 +8,7 @@ Array<T>::Array() : arrSize(0), arrContents(NULL)
 {}
 
 template <typename T>
-Array<T>::Array(size_t arrSize) : arrSize(arrSize), arrContents(new T[arrSize])
+Array<T>::Array(size_t arrSize) : arrSize(arrSize), arrContents(new T[arrSize]())
 {}
 
 template <typename T>
