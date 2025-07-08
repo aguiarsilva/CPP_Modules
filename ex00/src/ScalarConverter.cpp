@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   ScalarConverter.cpp                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: baguiar- <baguiar-@student.42wolfsburg.de  +#+  +:+       +#+        */
+/*   By: baguiar- <baguiar-@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/01 14:13:13 by baguiar-          #+#    #+#             */
-/*   Updated: 2025/07/03 10:54:05 by baguiar-         ###   ########.fr       */
+/*   Updated: 2025/07/08 10:21:28 by baguiar-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/ScalarConverter.hpp"
+#include <cerrno>
 
 void ScalarConverter::printAllTypes(int value)
 {
@@ -73,7 +74,7 @@ void ScalarConverter::printAllTypes(double value)
         std::cout << "int: impossible" << std::endl;
     }
 
-    if (value >= std::numeric_limits<float>::min() && value <= std::numeric_limits<float>::max())
+    if (value >= -std::numeric_limits<float>::max() && value <= std::numeric_limits<float>::max())
     {
         std::cout << std::fixed << std::setprecision(1);
         std::cout << "float: " << static_cast<float>(value) << "f" << std::endl;
@@ -166,7 +167,7 @@ void ScalarConverter::convert(const std::string& str)
             std::string floatStr = str.substr(0, str.length() - 1);
             double temp = strtod(floatStr.c_str(), &endptr);
 
-            if (*endptr == '\0' && endptr != floatStr.c_str())
+            if (*endptr == '\0' && endptr != floatStr.c_str() && errno != ERANGE)
             {
                 float f = static_cast<float>(temp);
                 printAllTypes(f);
@@ -178,7 +179,7 @@ void ScalarConverter::convert(const std::string& str)
         {
                 double d = strtod(str.c_str(), &endptr);
 
-                if (*endptr == '\0' && endptr != str.c_str())
+                if (*endptr == '\0' && endptr != str.c_str() && errno != ERANGE)
                 {
                     printAllTypes(d);
                 }
@@ -189,7 +190,7 @@ void ScalarConverter::convert(const std::string& str)
         {
             long temp = strtol(str.c_str(), &endptr, 10);
 
-            if (*endptr == '\0' && endptr != str.c_str())
+            if (*endptr == '\0' && endptr != str.c_str() && errno != ERANGE)
             {
                 if (temp >= std::numeric_limits<int>::min() && temp <= std::numeric_limits<int>::max())
                 {
