@@ -6,11 +6,11 @@
 #    By: baguiar- <baguiar-@student.42wolfsburg.de  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/23 14:49:46 by baguiar-          #+#    #+#              #
-#    Updated: 2025/07/04 14:49:05 by baguiar-         ###   ########.fr        #
+#    Updated: 2025/07/14 11:19:59 by baguiar-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = whatever
+NAME = span
 
 CC = c++
 CPPFLAGS = -std=c++98 -Wall -Wextra -Werror
@@ -20,6 +20,7 @@ OBJ_DIR = obj/
 INC_DIR = inc/
 
 SRC = main.cpp \
+	  Span.cpp
 
 OBJ = $(addprefix $(OBJ_DIR), $(SRC:.cpp=.o))
 
