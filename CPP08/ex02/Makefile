@@ -6,11 +6,11 @@
 #    By: baguiar- <baguiar-@student.42wolfsburg.de  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/23 14:49:46 by baguiar-          #+#    #+#              #
-#    Updated: 2025/07/04 14:49:05 by baguiar-         ###   ########.fr        #
+#    Updated: 2025/07/17 23:13:52 by baguiar-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = whatever
+NAME = abomination
 
 CC = c++
 CPPFLAGS = -std=c++98 -Wall -Wextra -Werror
