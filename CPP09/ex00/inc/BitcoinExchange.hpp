@@ -6,7 +6,7 @@
 /*   By: baguiar- <baguiar-@student.42wolfsburg.de  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/23 12:28:29 by baguiar-          #+#    #+#             */
-/*   Updated: 2025/07/25 11:15:41 by baguiar-         ###   ########.fr       */
+/*   Updated: 2025/07/27 10:09:40 by baguiar-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,8 @@ class BitcoinExchange
         void loadDatabase(const std::string& db_filename);
         bool validateDate(const std::string& date);
         bool isLeapYear(int year);
-        double getExchangeRate(const std::string& date);
+        bool getExchangeRate(const std::string& date, double& rate);
+        std::string trim(const std::string& str);
     
     public:
         //Orthodox Canonical Form
