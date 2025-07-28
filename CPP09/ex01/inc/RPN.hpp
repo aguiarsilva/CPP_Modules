@@ -6,7 +6,7 @@
 /*   By: baguiar- <baguiar-@student.42wolfsburg.de  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/27 14:03:33 by baguiar-          #+#    #+#             */
-/*   Updated: 2025/07/27 14:34:01 by baguiar-         ###   ########.fr       */
+/*   Updated: 2025/07/27 14:43:13 by baguiar-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,8 @@ class RPN
 
     public:
         RPN();
-        RPN(RPN const &other);
-        RPN &operator=(RPN const &other);
+        RPN(RPN const& other);
+        RPN &operator=(RPN const& other);
         ~RPN();
 
         int rpnCalculate(std::string const& expression); //exception throws std::runtime_error
