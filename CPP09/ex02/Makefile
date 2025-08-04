@@ -6,7 +6,7 @@
 #    By: baguiar- <baguiar-@student.42wolfsburg.de  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/23 14:49:46 by baguiar-          #+#    #+#              #
-#    Updated: 2025/07/28 14:03:30 by baguiar-         ###   ########.fr        #
+#    Updated: 2025/08/01 12:17:07 by baguiar-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,9 @@ OBJ_DIR = obj/
 INC_DIR = inc/
 
 SRC = main.cpp \
-	  PmergeMe.cpp
+	  PmergeMeVector.cpp \
+	  PmergeMeDeque.cpp \
+	  Utils.cpp
 
 OBJ = $(addprefix $(OBJ_DIR), $(SRC:.cpp=.o))
 

@@ -6,7 +6,7 @@
 /*   By: baguiar- <baguiar-@student.42wolfsburg.de  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/01 11:58:09 by baguiar-          #+#    #+#             */
-/*   Updated: 2025/08/01 12:12:18 by baguiar-         ###   ########.fr       */
+/*   Updated: 2025/08/04 13:11:48 by baguiar-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ class Utils
         static int strToInt(std::string const& str);
         static void displayErr(std::string const& msg);
         static void displayVec(std::vector<int> const& vec, std::string const& label);
-
+        static bool duplicatesCheck(std::vector<int> const& input);
 };
 
 #endif
