@@ -6,7 +6,7 @@
 /*   By: baguiar- <baguiar-@student.42wolfsburg.de  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/30 08:18:03 by baguiar-          #+#    #+#             */
-/*   Updated: 2025/07/30 14:55:19 by baguiar-         ###   ########.fr       */
+/*   Updated: 2025/08/05 09:45:24 by baguiar-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 #include <vector>
 #include <ctime>
 #include <iostream>
+#include "Utils.hpp"
 
 class PmergeMeVector
 {
@@ -25,10 +26,10 @@ class PmergeMeVector
         double m_exec_time;
 
         //Ford-Johnson Algorithm
-        void pairAndAllocate();
+        void pairAndAllocate(std::vector<int>& main_chain, std::vector<int>& pending, int& straggler, bool& has_straggler);
         void sortWinners();
         std::vector<int> JacobsthalSequence(int pending_count);
-        void insertPending();
+        void insertPending(std::vector<int>& main_chain, std::vector<int> const& pending, int straggler, bool has_straggler, std::vector<int> const& jacobsthal_seq);
         void recursiveFordJohnson(std::vector<int>& container);
         int binarySearchInsertPosition(int value, int upper_bound_position);
 

@@ -6,7 +6,7 @@
 /*   By: baguiar- <baguiar-@student.42wolfsburg.de  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/01 11:30:54 by baguiar-          #+#    #+#             */
-/*   Updated: 2025/08/01 11:56:57 by baguiar-         ###   ########.fr       */
+/*   Updated: 2025/08/05 08:40:36 by baguiar-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 #include <iostream>
 #include <vector>
 #include <ctime>
+#include "Utils.hpp"
 
 class PmergeMeDeque
 {
