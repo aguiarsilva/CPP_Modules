@@ -6,7 +6,7 @@
 /*   By: baguiar- <baguiar-@student.42wolfsburg.de  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/30 09:06:24 by baguiar-          #+#    #+#             */
-/*   Updated: 2025/08/05 09:55:05 by baguiar-         ###   ########.fr       */
+/*   Updated: 2025/08/05 12:19:44 by baguiar-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,13 +115,84 @@ std::vector<int> PmergeMeVector::JacobsthalSequence(int pending_count)
     {
         insertion_order.
     }
+
+    std::vector<int> jacobsthal;
+    
+    jacobsthal.push_back(0);
+    jacobsthal.push_back(1);
+
+    while (true)
+    {
+    	int next_jacobsthal = jacobsthal[jacobsthal.size()-1] + 2 * jacobsthal[jacobsthal.size()-2];
+	if (next_jacobsthal > pending_count)
+		break;
+	jacobsthal.push_back(next_jacobsthal);
+    }
+
+    //need to build the insertion sequence from J3 (index 3 in the jacobsthal sequence)
+    std::vector<bool> used(pending_count, false);
+
+    for (std::vector<int>::size_type i = 3; i < jacobsthal.size(); ++i)
+    {
+    	int index = jacobsthal[i] -1;
+
+	if (index < pending_count && !used[index])
+	{
+		insertion_order.push_back(index);
+		used[index] = true;
+	}
+
+	//backwards insertion_order sequence check
+	for (int j = jacobsthal[i]-2; i >= jacobsthal[i-1]; --j)
+	{
+		if (j >= 0 && j < pending_count && !used[j])
+		{
+			insertion_order.push_back(j);
+			used[j] = true;
+		}
+	}
+    }
+
+    //handle the remaining elements
+    for (int i = 0; i < pending_count; ++i)
+    {
+    	if (!used[i])
+		insertion_order.push_back(i);
+    }
+
+    return insertion_order;
 }
 
 void PmergeMeVector::insertPending(std::vector<int>& main_chain, std::vector<int> const& pending, int straggler, bool has_straggler, std::vector<int> const& jacobsthal_seq)
 {}
 
 void PmergeMeVector::recursiveFordJohnson(std::vector<int>& container)
-{}
+{
+	std::vector<int> main_chain;
+	std::vector<int> pending;
+	int straggler;
+	bool has_straggler;
+
+	//pair and separate
+	pairAndAllocate(main_chain, pending, straggler, has_straggler);
+
+	//recursively sort the main chain - it must be recursive
+	if (main_chain.size() > 1)
+	{
+		recursiveFordJohnson(main_chain);
+	}
+
+	//generate the jacobsthal numbers and do insert
+	if (!pending.empty() || has_straggler)
+	{
+		std::vector<int> jacobsthal_seq = JacobsthalSequence(pending.size() + (has_straggler ? 1 : 0));
+
+		//use jacobsthal order to insert pending elements
+		insertPending(main_chain, pending, straggler, has_straggler, jacobsthal_seq);
+	}
+	//update containers;
+	container = main_chain;
+}
 
 int PmergeMeVector::binarySearchInsertPosition(int value, int upper_bound_position)
 {}
