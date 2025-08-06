@@ -6,7 +6,7 @@
 /*   By: baguiar- <baguiar-@student.42wolfsburg.de  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/01 12:17:52 by baguiar-          #+#    #+#             */
-/*   Updated: 2025/08/04 13:43:00 by baguiar-         ###   ########.fr       */
+/*   Updated: 2025/08/05 14:12:38 by baguiar-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,13 @@ Utils::Utils() {}
 Utils::~Utils() {}
 
 Utils::Utils(Utils const& other)
-{}
+{
+    (void)other;
+}
 
 Utils &Utils::operator=(Utils const& other)
 {
+    (void)other;
     return (*this);
 }
 
@@ -31,7 +34,7 @@ std::vector<int> Utils::inputParsing(int argc, char **argv)
         throw std::invalid_argument("Usage: ./PmergeMe [positive ints...]");
 
     std::vector<int> res;
-    res.reserver(argc - 1);
+    res.reserve(argc - 1);
 
     for (int i = 1; i < argc; ++i)
     {
@@ -71,7 +74,7 @@ void Utils::inputValidation(std::vector<int> const& input)
 bool Utils::isValidNum(std::string const& str)
 {
     if (str.empty())
-        return false;i
+        return false;
 
     if (str.length() > 1 && str[0] == '0')
         return false;
@@ -112,7 +115,7 @@ void Utils::displayErr(std::string const& msg)
 
 void Utils::displayVec(std::vector<int> const& vec, std::string const& label)
 {
-    std::cout << label << ": ";
+    std::cout << label;
     for (std::vector<int>::const_iterator it = vec.begin(); it != vec.end(); ++it)
     {
         std::cout << *it;
