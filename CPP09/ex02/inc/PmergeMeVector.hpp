@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   PmergeMeVector.hpp                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: baguiar- <baguiar-@student.42wolfsburg.de  +#+  +:+       +#+        */
+/*   By: baguiar- <baguiar-@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/30 08:18:03 by baguiar-          #+#    #+#             */
-/*   Updated: 2025/08/05 09:45:24 by baguiar-         ###   ########.fr       */
+/*   Updated: 2025/08/06 23:09:50 by baguiar-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ class PmergeMeVector
         double m_exec_time;
 
         //Ford-Johnson Algorithm
-        void pairAndAllocate(std::vector<int>& main_chain, std::vector<int>& pending, int& straggler, bool& has_straggler);
+        void pairAndAllocate(std::vector<int>& source, std::vector<int>& main_chain, std::vector<int>& pending, int& straggler, bool& has_straggler);
         void sortWinners();
         std::vector<int> JacobsthalSequence(int pending_count);
         void insertPending(std::vector<int>& main_chain, std::vector<int> const& pending, int straggler, bool has_straggler, std::vector<int> const& jacobsthal_seq);

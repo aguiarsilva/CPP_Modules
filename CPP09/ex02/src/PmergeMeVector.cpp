@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   PmergeMeVector.cpp                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: baguiar- <baguiar-@student.42wolfsburg.de  +#+  +:+       +#+        */
+/*   By: baguiar- <baguiar-@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/30 09:06:24 by baguiar-          #+#    #+#             */
-/*   Updated: 2025/08/06 13:22:26 by baguiar-         ###   ########.fr       */
+/*   Updated: 2025/08/06 23:49:32 by baguiar-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ PmergeMeVector &PmergeMeVector::operator=(PmergeMeVector const& other)
 PmergeMeVector::~PmergeMeVector() {}
 
 //Private Methods
-void PmergeMeVector::pairAndAllocate(std::vector<int>& main_chain, std::vector<int>& pending, int& straggler, bool& has_straggler)
+void PmergeMeVector::pairAndAllocate(std::vector<int>& source, std::vector<int>& main_chain, std::vector<int>& pending, int& straggler, bool& has_straggler)
 {
     //output containers must be cleared before starting
     main_chain.clear();
@@ -46,37 +46,37 @@ void PmergeMeVector::pairAndAllocate(std::vector<int>& main_chain, std::vector<i
     has_straggler = false;
 
     //handle single element input
-    if (m_sorted.size() == 1)
+    if (source.size() == 1)
     {
-        main_chain.push_back(m_sorted[0]);
+        main_chain.push_back(source[0]);
         return ;
     }
 
     //handle two elements input
-    if (m_sorted.size() == 2)
+    if (source.size() == 2)
     {
-        if (m_sorted[0] <= m_sorted[1])
+        if (source [0] <= source[1])
         {
-            main_chain.push_back(m_sorted[1]);
-            pending.push_back(m_sorted[0]);        
+            main_chain.push_back(source[1]);
+            pending.push_back(source[0]);        
         }
         else
         {
-            main_chain.push_back(m_sorted[0]);
-            pending.push_back(m_sorted[1]);
+            main_chain.push_back(source[0]);
+            pending.push_back(source[1]);
         }
         return ;
     }
 
     //reserve memory space in vector
-    main_chain.reserve(m_sorted.size() / 2 + 1);
-    pending.reserve(m_sorted.size() / 2 + 1);
+    main_chain.reserve(source.size() / 2 + 1);
+    pending.reserve(source.size() / 2 + 1);
 
     //handle the general case and build pairs
-    for (std::vector<int>::size_type i = 0; i < m_sorted.size() - 1; i += 2)
+    for (std::vector<int>::size_type i = 0; i < source.size() - 1; i += 2)
     {
-        int first = m_sorted[i];
-        int second = m_sorted[i + 1];
+        int first = source[i];
+        int second = source[i + 1];
 
         if (first <= second)
         {
@@ -91,9 +91,9 @@ void PmergeMeVector::pairAndAllocate(std::vector<int>& main_chain, std::vector<i
     }
     
     //handle straggler
-    if (m_sorted.size() % 2 == 1)
+    if (source.size() % 2 == 1)
     {
-        straggler = m_sorted.back();
+        straggler = source.back();
         has_straggler = true;
     }
 
@@ -122,9 +122,9 @@ std::vector<int> PmergeMeVector::JacobsthalSequence(int pending_count)
     while (true)
     {
     	int next_jacobsthal = jacobsthal[jacobsthal.size()-1] + 2 * jacobsthal[jacobsthal.size()-2];
-	if (next_jacobsthal > pending_count)
-		break;
-	jacobsthal.push_back(next_jacobsthal);
+	    if (next_jacobsthal - 1 >= pending_count)
+		    break;
+	    jacobsthal.push_back(next_jacobsthal);
     }
 
     //need to build the insertion sequence from J3 (index 3 in the jacobsthal sequence)
@@ -163,13 +163,9 @@ std::vector<int> PmergeMeVector::JacobsthalSequence(int pending_count)
 
 void PmergeMeVector::insertPending(std::vector<int>& main_chain, std::vector<int> const& pending, int straggler, bool has_straggler, std::vector<int> const& jacobsthal_seq)
 {
-   if (!pending.empty())
-      main_chain.insert(main_chain.begin(), pending[0]);
 
   //use a bool vector to keep track of the already inserted elements
     std::vector<bool> inserted(pending.size(), false);
-    if (!pending.empty())
-        inserted[0] = true;
 
     //use the Jacobsthal numbers to insert the remaining elements
     for (std::vector<int>::size_type i = 0; i < jacobsthal_seq.size(); ++i)
@@ -181,22 +177,10 @@ void PmergeMeVector::insertPending(std::vector<int>& main_chain, std::vector<int
 
         int value = pending[pending_index];
 
-        int upper_bound = pending_index + 1;
-        
-        for (int j = 0; j < pending_index; ++j)
-        {
-            if (inserted[j])
-                upper_bound++;
-        }
-
-        //upper_bound shouldn't exceed main_chain size
-        if (upper_bound > static_cast<int>(main_chain.size()))
-            upper_bound = main_chain.size();
-
         //do binary search for insertion position
         int insert_position = 0;
         int left = 0;
-        int right = upper_bound - 1;
+        int right = static_cast<int>(main_chain.size()) - 1;
 
         while (left <= right)
         {
@@ -209,10 +193,58 @@ void PmergeMeVector::insertPending(std::vector<int>& main_chain, std::vector<int
             else
                 right = mid - 1;
         }
-        main_chain.insert(main_chain.begin() + insert_position, straggler);
+        main_chain.insert(main_chain.begin() + insert_position, value);
+        inserted[pending_index] = true;
+    }
+    
+    //insert any remaining uninserted pending elements
+    for (std::vector<int>::size_type i = 0; i < pending.size(); ++i)
+    {
+        if (!inserted[i])
+        {
+            int value = pending[i];
+
+            //binary search entire main_chain for the position
+            int insert_position = 0;
+            int left = 0;
+            int right = static_cast<int>(main_chain.size()) - 1;
+
+            while (left <= right)
+            {
+                int mid = left + (right - left) / 2;
+                if (main_chain[mid] < value)
+                {
+                    insert_position = mid + 1;
+                    left = mid + 1;
+                }
+                else
+                    right = mid - 1;
+            }
+            main_chain.insert(main_chain.begin() + insert_position, value);
+        }
+    }
+    //handle straggler if existent
+    if (has_straggler)
+    {
+        int insert_position = 0;
+        int left = 0;
+        int right = static_cast<int>(main_chain.size()) - 1;
+
+       while (left <= right)
+       {
+            int mid = left + (right - left) / 2;
+            
+            if (main_chain[mid] < straggler)
+            {
+                insert_position = mid + 1;
+                left = mid + 1;
+            }
+            else
+                right = mid - 1;
+       }
+      main_chain.insert(main_chain.begin() + insert_position, straggler); 
     }
 }
-
 
 void PmergeMeVector::recursiveFordJohnson(std::vector<int>& container)
 {
@@ -222,7 +254,7 @@ void PmergeMeVector::recursiveFordJohnson(std::vector<int>& container)
 	bool has_straggler;
 
 	//pair and separate
-	pairAndAllocate(main_chain, pending, straggler, has_straggler);
+	pairAndAllocate(container, main_chain, pending, straggler, has_straggler);
 
 	//recursively sort the main chain - it must be recursive
 	if (main_chain.size() > 1)
@@ -233,7 +265,7 @@ void PmergeMeVector::recursiveFordJohnson(std::vector<int>& container)
 	//generate the jacobsthal numbers and do insert
 	if (!pending.empty() || has_straggler)
 	{
-		std::vector<int> jacobsthal_seq = JacobsthalSequence(pending.size() + (has_straggler ? 1 : 0));
+		std::vector<int> jacobsthal_seq = JacobsthalSequence(static_cast<int>(pending.size()));
 
 		//use jacobsthal order to insert pending elements
 		insertPending(main_chain, pending, straggler, has_straggler, jacobsthal_seq);
