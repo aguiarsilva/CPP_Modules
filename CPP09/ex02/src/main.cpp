@@ -6,7 +6,7 @@
 /*   By: baguiar- <baguiar-@student.42wolfsburg.de  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/30 08:34:08 by baguiar-          #+#    #+#             */
-/*   Updated: 2025/08/06 13:31:24 by baguiar-         ###   ########.fr       */
+/*   Updated: 2025/08/08 20:08:40 by baguiar-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,22 @@ int main(int argc, char **argv)
         vectorSorter.sort();
 
         vectorSorter.printResults();
+
+        //Testing deque implementation
+        std::cout << "\n== Testing PmergeMeDeque == " << std::endl;
+
+        PmergeMeDeque dequeSorter(input);
+
+        if (dequeSorter.isEmpty())
+        {
+            std::cout << "Deque is empty!" << std::endl;
+            return 1;
+        }
+        
+        std::cout << "Input size: " << dequeSorter.size() << " elements" << std::endl;
+
+        dequeSorter.sort();
+        dequeSorter.printResults();
 
         std::cout << "\n== Test completed sucessfully! == " << std::endl;
 

@@ -6,7 +6,7 @@
 /*   By: baguiar- <baguiar-@student.42wolfsburg.de  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/01 11:30:54 by baguiar-          #+#    #+#             */
-/*   Updated: 2025/08/05 08:40:36 by baguiar-         ###   ########.fr       */
+/*   Updated: 2025/08/07 13:19:20 by baguiar-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,9 @@ class PmergeMeDeque
         double m_exec_time;
 
         //Ford-Johnshon Algorithm
-        void pairAndAllocate();
-        void sortWinners();
+        void pairAndAllocate(std::deque<int>& source, std::deque<int>& main_chain, std::deque<int>& pending, int& straggler, bool& has_straggler);
         std::deque<int> JacobsthalSequence(int pending_count);
-        void insertPending();
+        void insertPending(std::deque<int>& main_chain, std::deque<int> const& pending, int straggler, bool has_straggler, std::deque<int> const& jacobsthal_seq);
         void recursiveFordJohnson(std::deque<int>& container);
         int binarySearchInsertPosition(int value, int upper_bound_position);
 
