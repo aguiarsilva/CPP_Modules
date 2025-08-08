@@ -6,11 +6,13 @@
 /*   By: baguiar- <baguiar-@student.42wolfsburg.de  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/07 13:21:23 by baguiar-          #+#    #+#             */
-/*   Updated: 2025/08/08 20:04:08 by baguiar-         ###   ########.fr       */
+/*   Updated: 2025/08/09 00:20:47 by baguiar-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/PmergeMeDeque.hpp"
+
+int PmergeMeDeque::m_comparison_count = 0;
 
 PmergeMeDeque::PmergeMeDeque() : m_exec_time(0.0)
 {}
@@ -53,7 +55,7 @@ void PmergeMeDeque::pairAndAllocate(std::deque<int>& source, std::deque<int>& ma
 
     if (source.size() == 2)
     {
-        if (source[0] <= source[1])
+        if (!compareAndCount(source[1], source[0]))
         {
             main_chain.push_back(source[1]);
             pending.push_back(source[0]);
@@ -72,7 +74,7 @@ void PmergeMeDeque::pairAndAllocate(std::deque<int>& source, std::deque<int>& ma
         int first = source[i];
         int second = source[i + 1];
 
-        if (first <= second)
+        if (!compareAndCount(second, first))
         {
             main_chain.push_back(second);
             pending.push_back(first);
@@ -175,7 +177,7 @@ void PmergeMeDeque::insertPending(std::deque<int>& main_chain, std::deque<int> c
         while (left <= right)
         {
             int mid = left + (right - left) / 2;
-            if (main_chain[mid] < value)
+            if (compareAndCount(main_chain[mid], value))
             {
                 insert_position = mid + 1;
                 left = mid + 1;
@@ -200,7 +202,7 @@ void PmergeMeDeque::insertPending(std::deque<int>& main_chain, std::deque<int> c
             while (left <= right)
             {
                 int mid = left + (right - left) / 2;
-                if (main_chain[mid] < value)
+                if (compareAndCount(main_chain[mid], value))
                 {
                     insert_position = mid + 1;
                     left = mid + 1;
@@ -222,7 +224,7 @@ void PmergeMeDeque::insertPending(std::deque<int>& main_chain, std::deque<int> c
         {
             int mid = left + (right - left) / 2;
 
-            if (main_chain[mid] < straggler)
+            if (compareAndCount(main_chain[mid], straggler))
             {
                 insert_position = mid + 1;
                 left = mid + 1;
@@ -309,6 +311,7 @@ void PmergeMeDeque::printResults() const
 
     std::cout << "Time to process a range of " << m_input.size()
         << " elements with std::deque : " << m_exec_time << " us " << std::endl;
+    std::cout << "Number of comparisons made: " << getComparisonCount() << std::endl;
 }
 
 double PmergeMeDeque::getExecutionTime() const
@@ -324,4 +327,21 @@ bool PmergeMeDeque::isEmpty() const
 std::deque<int>::size_type PmergeMeDeque::size() const
 {
     return m_input.size();
+}
+
+//methods to track comparisons
+bool PmergeMeDeque::compareAndCount(int a, int b) const
+{
+    m_comparison_count++;
+    return a < b;
+}
+
+int PmergeMeDeque::getComparisonCount()
+{
+    return m_comparison_count;
+}
+
+void PmergeMeDeque::resetComparisonCount()
+{
+    m_comparison_count = 0;
 }
