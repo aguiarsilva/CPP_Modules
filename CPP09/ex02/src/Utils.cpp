@@ -6,7 +6,7 @@
 /*   By: baguiar- <baguiar-@student.42wolfsburg.de  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/01 12:17:52 by baguiar-          #+#    #+#             */
-/*   Updated: 2025/08/05 14:12:38 by baguiar-         ###   ########.fr       */
+/*   Updated: 2025/08/09 00:02:31 by baguiar-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ Utils &Utils::operator=(Utils const& other)
 std::vector<int> Utils::inputParsing(int argc, char **argv)
 {
     if (argc < 2)
-        throw std::invalid_argument("Usage: ./PmergeMe [positive ints...]");
+        throw std::invalid_argument("Usage: ./PmergeMe [unique positive ints...]");
 
     std::vector<int> res;
     res.reserve(argc - 1);

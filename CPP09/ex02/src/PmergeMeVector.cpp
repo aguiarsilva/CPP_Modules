@@ -6,11 +6,13 @@
 /*   By: baguiar- <baguiar-@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/30 09:06:24 by baguiar-          #+#    #+#             */
-/*   Updated: 2025/08/06 23:49:32 by baguiar-         ###   ########.fr       */
+/*   Updated: 2025/08/08 23:56:13 by baguiar-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/PmergeMeVector.hpp"
+
+int PmergeMeVector::m_comparison_count = 0;
 
 PmergeMeVector::PmergeMeVector() : m_exec_time(0.0)
 {}
@@ -55,7 +57,7 @@ void PmergeMeVector::pairAndAllocate(std::vector<int>& source, std::vector<int>&
     //handle two elements input
     if (source.size() == 2)
     {
-        if (source [0] <= source[1])
+        if (!compareAndCount(source[1], source[0]))
         {
             main_chain.push_back(source[1]);
             pending.push_back(source[0]);        
@@ -78,7 +80,7 @@ void PmergeMeVector::pairAndAllocate(std::vector<int>& source, std::vector<int>&
         int first = source[i];
         int second = source[i + 1];
 
-        if (first <= second)
+        if (!compareAndCount(second, first))
         {
             main_chain.push_back(second);
             pending.push_back(first);
@@ -185,7 +187,7 @@ void PmergeMeVector::insertPending(std::vector<int>& main_chain, std::vector<int
         while (left <= right)
         {
             int mid = left + (right - left) / 2;
-            if (main_chain[mid] < value)
+            if (compareAndCount(main_chain[mid], value))
             {
                 insert_position = mid + 1;
                 left = mid + 1;
@@ -212,7 +214,7 @@ void PmergeMeVector::insertPending(std::vector<int>& main_chain, std::vector<int
             while (left <= right)
             {
                 int mid = left + (right - left) / 2;
-                if (main_chain[mid] < value)
+                if (compareAndCount(main_chain[mid], value))
                 {
                     insert_position = mid + 1;
                     left = mid + 1;
@@ -234,7 +236,7 @@ void PmergeMeVector::insertPending(std::vector<int>& main_chain, std::vector<int
        {
             int mid = left + (right - left) / 2;
             
-            if (main_chain[mid] < straggler)
+            if (compareAndCount(main_chain[mid], straggler))
             {
                 insert_position = mid + 1;
                 left = mid + 1;
@@ -319,6 +321,7 @@ void PmergeMeVector::printResults() const
 
     std::cout << "Time to process a range of " << m_input.size()
         << " elements with std::vector : " << m_exec_time << " us " << std::endl;
+    std::cout << "Number of comparisons made: " << getComparisonCount() << std::endl;
 }
 
 double PmergeMeVector::getExecutionTime() const
@@ -335,4 +338,22 @@ std::vector<int>::size_type PmergeMeVector::size() const
 {
     return m_input.size();
 }
+
+//methods to track comparisons
+bool PmergeMeVector::compareAndCount(int a, int b) const
+{
+    m_comparison_count++;
+    return a < b;
+}
+
+int PmergeMeVector::getComparisonCount()
+{
+    return m_comparison_count;
+}
+
+void PmergeMeVector::resetComparisonCount()
+{
+    m_comparison_count = 0;
+}
+
 

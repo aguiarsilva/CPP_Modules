@@ -6,7 +6,7 @@
 /*   By: baguiar- <baguiar-@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/30 08:18:03 by baguiar-          #+#    #+#             */
-/*   Updated: 2025/08/06 23:09:50 by baguiar-         ###   ########.fr       */
+/*   Updated: 2025/08/08 23:10:22 by baguiar-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,9 @@ class PmergeMeVector
         std::vector<int> m_sorted;
         double m_exec_time;
 
+        //add counter to check number of comparisons made by algorithm
+        static int m_comparison_count;
+
         //Ford-Johnson Algorithm
         void pairAndAllocate(std::vector<int>& source, std::vector<int>& main_chain, std::vector<int>& pending, int& straggler, bool& has_straggler);
         void sortWinners();
@@ -32,6 +35,9 @@ class PmergeMeVector
         void insertPending(std::vector<int>& main_chain, std::vector<int> const& pending, int straggler, bool has_straggler, std::vector<int> const& jacobsthal_seq);
         void recursiveFordJohnson(std::vector<int>& container);
         int binarySearchInsertPosition(int value, int upper_bound_position);
+
+        //add method to check if the comparison is counted
+        bool compareAndCount(int a, int b) const;
 
     public:
         //Orthodox Canonical Form
@@ -47,6 +53,10 @@ class PmergeMeVector
         double getExecutionTime() const;
         bool isEmpty() const;
         std::vector<int>::size_type size() const;
+
+        //getter for the comparison counting test and resetter for count
+        static int getComparisonCount();
+        static void resetComparisonCount();
 
 };
 
