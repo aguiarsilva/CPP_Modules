@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: baguiar- <baguiar-@student.42wolfsburg.de  +#+  +:+       +#+        */
+/*   By: baguiar- <baguiar-@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/30 08:34:08 by baguiar-          #+#    #+#             */
-/*   Updated: 2025/08/08 23:54:16 by baguiar-         ###   ########.fr       */
+/*   Updated: 2025/08/19 22:49:03 by baguiar-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,22 +15,6 @@
 #include "../inc/Utils.hpp"
 #include <iostream>
 #include <cmath>
-
-//Function to calculate theoretical minimum comparisons for Ford-Johnson Algorithm
-int calculateTheoreticalComparisons(int n)
-{
-    if (n <= 1)
-        return 0;
-    
-    if (n == 2)
-        return 1;
-
-    //Ford-Johnshon theoretical formula aproximation
-    //For n elements, it's roughly n * log2(n) - 2^(log2(n)+1) + n
-    double log_n = std::log(static_cast<double>(n)) / std::log(2.0);
-    int theoretical = static_cast<int>(n * log_n - std::pow(2.0, static_cast<int>(log_n) + 1) + n);
-    return theoretical > 0 ? theoretical : n - 1;
-}
 
 int main(int argc, char **argv)
 {
@@ -41,7 +25,6 @@ int main(int argc, char **argv)
 
         Utils::inputValidation(input);
 
-        //Testing vector implementation
         std::cout << "== Testing PmergeMeVector ==" << std::endl;
 
         PmergeMeVector::resetComparisonCount();
@@ -62,18 +45,21 @@ int main(int argc, char **argv)
 
         vectorSorter.printResults();
 
-        //Show comparison analysis
-        int actual_comparisons = PmergeMeVector::getComparisonCount();
-        int theoretical_min = calculateTheoreticalComparisons(static_cast<int>(input.size()));
+        //Show comparison analysis for vector
+        int vector_comparisons = PmergeMeVector::getComparisonCount();
+        int ford_johnson_bound = Utils::calculateFordJohnsonBound(static_cast<int>(input.size()));
+        int info_theoretic_min = Utils::calculateInformationTheoreticMinimum(static_cast<int>(input.size()));
 
-        std::cout << "Theoretical minimum comparisons: " << theoretical_min << std::endl;
-        std::cout << "Efficiency: " << (actual_comparisons <= theoretical_min * 1.2 ? "GOOD" : "NEEDS IMPROVEMENT") << std::endl;
-
+        std::cout << "Information-theoretic minimum: " << info_theoretic_min << std::endl;
+        std::cout << "Ford-Johnson theoretical bound: " << ford_johnson_bound << std::endl;
+        std::cout << "Vector efficiency: " << (vector_comparisons <= ford_johnson_bound ? "EXCELLENT" : 
+                     vector_comparisons <= ford_johnson_bound * 1.2 ? "GOOD" : "NEEDS IMPROVEMENT") << std::endl;
 
         //Testing deque implementation
         std::cout << "\n== Testing PmergeMeDeque == " << std::endl;
 
-        //PmergeMeDeque::resetComparisonCount();
+        // Reset comparison count before deque test
+        PmergeMeDeque::resetComparisonCount();
 
         PmergeMeDeque dequeSorter(input);
 
@@ -88,15 +74,31 @@ int main(int argc, char **argv)
         dequeSorter.sort();
         dequeSorter.printResults();
 
-        std::cout << "\n== Test completed sucessfully! == " << std::endl;
+        // Show comparison analysis for deque
+        int deque_comparisons = PmergeMeDeque::getComparisonCount();
+        std::cout << "Deque efficiency: " << (deque_comparisons <= ford_johnson_bound ? "EXCELLENT" : 
+                     deque_comparisons <= ford_johnson_bound * 1.2 ? "GOOD" : "NEEDS IMPROVEMENT") << std::endl;
+
+        std::cout << "\n== Test completed successfully! == " << std::endl;
 
         //Performance comparison
         std::cout << "\n== Performance Comparison == " << std::endl;
         std::cout << "Vector time: " << vectorSorter.getExecutionTime() << " us" << std::endl;
         std::cout << "Deque time: " << dequeSorter.getExecutionTime() << " us" << std::endl;
+        std::cout << "Vector comparisons: " << vector_comparisons << std::endl;
+        std::cout << "Deque comparisons: " << deque_comparisons << std::endl;
 
-        double ratio = vectorSorter.getExecutionTime() / dequeSorter.getExecutionTime();
-        std::cout << "Vector / Deque ratio: " << ratio << std::endl;
+        if (dequeSorter.getExecutionTime() > 0)
+        {
+            double ratio = vectorSorter.getExecutionTime() / dequeSorter.getExecutionTime();
+            std::cout << "Vector / Deque time ratio: " << ratio << std::endl;
+        }
+
+        if (deque_comparisons > 0)
+        {
+            double comp_ratio = static_cast<double>(vector_comparisons) / deque_comparisons;
+            std::cout << "Vector / Deque comparison ratio: " << comp_ratio << std::endl;
+        }
 
     }
     catch (std::exception const& e)
@@ -104,5 +106,5 @@ int main(int argc, char **argv)
         Utils::displayErr(e.what());
         return 1;
     }
-        return 0;
+    return 0;
 }

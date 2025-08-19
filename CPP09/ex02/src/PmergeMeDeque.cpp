@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   PmergeMeDeque.cpp                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: baguiar- <baguiar-@student.42wolfsburg.de  +#+  +:+       +#+        */
+/*   By: baguiar- <baguiar-@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/07 13:21:23 by baguiar-          #+#    #+#             */
-/*   Updated: 2025/08/09 00:20:47 by baguiar-         ###   ########.fr       */
+/*   Updated: 2025/08/19 21:59:30 by baguiar-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void PmergeMeDeque::pairAndAllocate(std::deque<int>& source, std::deque<int>& ma
 
     if (source.size() == 2)
     {
-        if (!compareAndCount(source[1], source[0]))
+        if (!compareAndCount(source[1], source[0])) // source[0] <= source[1]
         {
             main_chain.push_back(source[1]);
             pending.push_back(source[0]);
@@ -74,7 +74,7 @@ void PmergeMeDeque::pairAndAllocate(std::deque<int>& source, std::deque<int>& ma
         int first = source[i];
         int second = source[i + 1];
 
-        if (!compareAndCount(second, first))
+        if (!compareAndCount(second, first)) // first <= second
         {
             main_chain.push_back(second);
             pending.push_back(first);
@@ -106,37 +106,33 @@ std::deque<int> PmergeMeDeque::JacobsthalSequence(int pending_count)
         return insertion_order;
     }
 
+    // Generate Jacobsthal numbers: 1, 1, 3, 5, 11, 21, 43, 85, ...
     std::deque<int> jacobsthal;
-
-    jacobsthal.push_back(0);
-    jacobsthal.push_back(1);
-
-    while (true)
+    jacobsthal.push_back(1);  // J(1) = 1
+    jacobsthal.push_back(1);  // J(2) = 1
+    
+    // Generate: J(n) = J(n-1) + 2*J(n-2)
+    while (jacobsthal.back() < pending_count)
     {
-        int next_jacobsthal = jacobsthal[jacobsthal.size() - 1] + 2 * jacobsthal[jacobsthal.size() - 2];
-        if (next_jacobsthal - 1 >= pending_count)
-            break ;
-        jacobsthal.push_back(next_jacobsthal);
+        int next = jacobsthal[jacobsthal.size()-1] + 2 * jacobsthal[jacobsthal.size()-2];
+        jacobsthal.push_back(next);
     }
 
+    // Always insert pending[0] first
     insertion_order.push_back(0);
-
     std::vector<bool> used(pending_count, false);
     used[0] = true;
 
+    // Use Jacobsthal numbers starting from J(3) = 3
     std::deque<int>::size_type i;
-    for (i = 2; i < jacobsthal.size(); ++i)
+    for (i = 2; i < jacobsthal.size(); ++i) // Start from jacobsthal[2] = 3
     {
-        int index = jacobsthal[i] - 1;
-
-        if (index < pending_count && !used[index])
-        {
-            insertion_order.push_back(index);
-            used[index] = true;
-        }
-
+        int current_jacobsthal = jacobsthal[i];
+        int prev_jacobsthal = jacobsthal[i-1];
+        
+        // Insert in descending order from current_jacobsthal down to prev_jacobsthal + 1
         int j;
-        for (j = jacobsthal[i] - 2; j >= jacobsthal[i - 1]; --j)
+        for (j = (current_jacobsthal < pending_count ? current_jacobsthal : pending_count) - 1; j >= prev_jacobsthal; --j)
         {
             if (j >= 0 && j < pending_count && !used[j])
             {
@@ -146,8 +142,9 @@ std::deque<int> PmergeMeDeque::JacobsthalSequence(int pending_count)
         }
     }
 
+    // Add remaining elements
     int k;
-    for (k = 0; k < pending_count; ++k)
+    for (k = 1; k < pending_count; ++k) // Start from 1 since 0 is already added
     {
         if (!used[k])
             insertion_order.push_back(k);
@@ -158,21 +155,39 @@ std::deque<int> PmergeMeDeque::JacobsthalSequence(int pending_count)
 
 void PmergeMeDeque::insertPending(std::deque<int>& main_chain, std::deque<int> const& pending, int straggler, bool has_straggler, std::deque<int> const& jacobsthal_seq)
 {
-    std::vector<bool> inserted(pending.size(), false);
+    if (pending.empty() && !has_straggler)
+        return;
 
     std::deque<int>::size_type i;
     for (i = 0; i < jacobsthal_seq.size(); ++i)
     {
         int pending_index = jacobsthal_seq[i];
-
-        if (pending_index >= static_cast<int>(pending.size()) || inserted[pending_index])
-            continue ;
+        
+        if (pending_index >= static_cast<int>(pending.size()))
+            continue;
 
         int value = pending[pending_index];
+        
+        // Critical optimization: Calculate proper upper bound for binary search
+        int search_limit;
+        
+        if (pending_index == 0)
+        {
+            // pending[0] can only go up to position of its pair (main_chain[0])
+            search_limit = 1; // It's guaranteed ≤ main_chain[0]
+        }
+        else
+        {
+            // For pending[k], upper bound is position of main_chain[k] + elements already inserted
+            search_limit = pending_index + 1 + static_cast<int>(i); // +i for elements already inserted
+            if (search_limit > static_cast<int>(main_chain.size()))
+                search_limit = static_cast<int>(main_chain.size());
+        }
 
+        // Binary search with limited range
         int insert_position = 0;
         int left = 0;
-        int right = static_cast<int>(main_chain.size()) - 1;
+        int right = search_limit - 1;
 
         while (left <= right)
         {
@@ -185,33 +200,8 @@ void PmergeMeDeque::insertPending(std::deque<int>& main_chain, std::deque<int> c
             else
                 right = mid - 1;
         }
+        
         main_chain.insert(main_chain.begin() + insert_position, value);
-        inserted[pending_index] = true;
-    }
-
-    for (i = 0; i < pending.size(); ++i)
-    {
-        if (!inserted[i])
-        {
-            int value = pending[i];
-
-            int insert_position = 0;
-            int left = 0;
-            int right = static_cast<int>(main_chain.size()) - 1;
-
-            while (left <= right)
-            {
-                int mid = left + (right - left) / 2;
-                if (compareAndCount(main_chain[mid], value))
-                {
-                    insert_position = mid + 1;
-                    left = mid + 1;
-                }
-                else
-                    right = mid - 1;
-            }
-            main_chain.insert(main_chain.begin() + insert_position, value);
-        }
     }
 
     if (has_straggler)
@@ -238,6 +228,26 @@ void PmergeMeDeque::insertPending(std::deque<int>& main_chain, std::deque<int> c
 
 void PmergeMeDeque::recursiveFordJohnson(std::deque<int>& container)
 {
+    // Optimized base cases with insertion sort for very small arrays
+    if (container.size() <= 1)
+        return;
+    
+    if (container.size() == 2)
+    {
+        if (compareAndCount(container[1], container[0])) // container[1] < container[0]
+        {
+            std::swap(container[0], container[1]);
+        }
+        return;
+    }
+    
+    // For small arrays (3-5 elements), insertion sort might be faster
+    if (container.size() <= 5)
+    {
+        insertionSort(container);
+        return;
+    }
+
     std::deque<int> main_chain;
     std::deque<int> pending;
     int straggler;
@@ -245,19 +255,39 @@ void PmergeMeDeque::recursiveFordJohnson(std::deque<int>& container)
 
     pairAndAllocate(container, main_chain, pending, straggler, has_straggler);
 
+    // Recursively sort the main chain
     if (main_chain.size() > 1)
     {
         recursiveFordJohnson(main_chain);
     }
 
+    // Insert pending elements using Jacobsthal sequence
     if (!pending.empty() || has_straggler)
     {
         std::deque<int> jacobsthal_seq = JacobsthalSequence(static_cast<int>(pending.size()));
-
         insertPending(main_chain, pending, straggler, has_straggler, jacobsthal_seq);
     }
-
+    
     container = main_chain;
+}
+
+// New optimized insertion sort for small arrays
+void PmergeMeDeque::insertionSort(std::deque<int>& container)
+{
+    std::deque<int>::size_type i;
+    for (i = 1; i < container.size(); ++i)
+    {
+        int key = container[i];
+        int j = static_cast<int>(i) - 1;
+        
+        // Move elements greater than key one position ahead
+        while (j >= 0 && compareAndCount(key, container[j]))
+        {
+            container[j + 1] = container[j];
+            j--;
+        }
+        container[j + 1] = key;
+    }
 }
 
 int PmergeMeDeque::binarySearchInsertPosition(int value, int upper_bound_position)
@@ -268,7 +298,7 @@ int PmergeMeDeque::binarySearchInsertPosition(int value, int upper_bound_positio
     while (left < right)
     {
         int mid = left + (right - left) / 2;
-        if (m_sorted[mid] < value)
+        if (compareAndCount(m_sorted[mid], value))
             left = mid + 1;
         else
             right = mid;

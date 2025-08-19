@@ -6,7 +6,7 @@
 /*   By: baguiar- <baguiar-@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/30 08:18:03 by baguiar-          #+#    #+#             */
-/*   Updated: 2025/08/08 23:10:22 by baguiar-         ###   ########.fr       */
+/*   Updated: 2025/08/20 00:03:51 by baguiar-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ class PmergeMeVector
         std::vector<int> JacobsthalSequence(int pending_count);
         void insertPending(std::vector<int>& main_chain, std::vector<int> const& pending, int straggler, bool has_straggler, std::vector<int> const& jacobsthal_seq);
         void recursiveFordJohnson(std::vector<int>& container);
+        void insertionSort(std::vector<int>& container);
         int binarySearchInsertPosition(int value, int upper_bound_position);
 
         //add method to check if the comparison is counted

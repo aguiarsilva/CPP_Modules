@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   PmergeMeDeque.hpp                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: baguiar- <baguiar-@student.42wolfsburg.de  +#+  +:+       +#+        */
+/*   By: baguiar- <baguiar-@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/01 11:30:54 by baguiar-          #+#    #+#             */
-/*   Updated: 2025/08/09 00:07:04 by baguiar-         ###   ########.fr       */
+/*   Updated: 2025/08/19 22:00:12 by baguiar-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ class PmergeMeDeque
         std::deque<int> JacobsthalSequence(int pending_count);
         void insertPending(std::deque<int>& main_chain, std::deque<int> const& pending, int straggler, bool has_straggler, std::deque<int> const& jacobsthal_seq);
         void recursiveFordJohnson(std::deque<int>& container);
+        void insertionSort(std::deque<int>& container);
         int binarySearchInsertPosition(int value, int upper_bound_position);
 
         //add method to check if comparison is counted
