@@ -6,7 +6,7 @@
 /*   By: baguiar- <baguiar-@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/07 13:21:23 by baguiar-          #+#    #+#             */
-/*   Updated: 2025/08/19 21:59:30 by baguiar-         ###   ########.fr       */
+/*   Updated: 2025/08/27 09:07:39 by baguiar-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -168,7 +168,6 @@ void PmergeMeDeque::insertPending(std::deque<int>& main_chain, std::deque<int> c
 
         int value = pending[pending_index];
         
-        // Critical optimization: Calculate proper upper bound for binary search
         int search_limit;
         
         if (pending_index == 0)
@@ -228,7 +227,6 @@ void PmergeMeDeque::insertPending(std::deque<int>& main_chain, std::deque<int> c
 
 void PmergeMeDeque::recursiveFordJohnson(std::deque<int>& container)
 {
-    // Optimized base cases with insertion sort for very small arrays
     if (container.size() <= 1)
         return;
     
@@ -241,7 +239,6 @@ void PmergeMeDeque::recursiveFordJohnson(std::deque<int>& container)
         return;
     }
     
-    // For small arrays (3-5 elements), insertion sort might be faster
     if (container.size() <= 5)
     {
         insertionSort(container);
@@ -341,7 +338,8 @@ void PmergeMeDeque::printResults() const
 
     std::cout << "Time to process a range of " << m_input.size()
         << " elements with std::deque : " << m_exec_time << " us " << std::endl;
-    std::cout << "Number of comparisons made: " << getComparisonCount() << std::endl;
+    //DEBUG
+    //std::cout << "Number of comparisons made: " << getComparisonCount() << std::endl;
 }
 
 double PmergeMeDeque::getExecutionTime() const

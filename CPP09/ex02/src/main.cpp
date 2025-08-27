@@ -6,7 +6,7 @@
 /*   By: baguiar- <baguiar-@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/30 08:34:08 by baguiar-          #+#    #+#             */
-/*   Updated: 2025/08/19 22:49:03 by baguiar-         ###   ########.fr       */
+/*   Updated: 2025/08/27 09:06:26 by baguiar-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,15 +45,16 @@ int main(int argc, char **argv)
 
         vectorSorter.printResults();
 
-        //Show comparison analysis for vector
-        int vector_comparisons = PmergeMeVector::getComparisonCount();
-        int ford_johnson_bound = Utils::calculateFordJohnsonBound(static_cast<int>(input.size()));
-        int info_theoretic_min = Utils::calculateInformationTheoreticMinimum(static_cast<int>(input.size()));
+        //DEBUG - Show comparison analysis for vector
+        //int vector_comparisons = PmergeMeVector::getComparisonCount();
+        //int ford_johnson_bound = Utils::calculateFordJohnsonBound(static_cast<int>(input.size()));
+        //int info_theoretic_min = Utils::calculateInformationTheoreticMinimum(static_cast<int>(input.size()));
 
-        std::cout << "Information-theoretic minimum: " << info_theoretic_min << std::endl;
-        std::cout << "Ford-Johnson theoretical bound: " << ford_johnson_bound << std::endl;
-        std::cout << "Vector efficiency: " << (vector_comparisons <= ford_johnson_bound ? "EXCELLENT" : 
-                     vector_comparisons <= ford_johnson_bound * 1.2 ? "GOOD" : "NEEDS IMPROVEMENT") << std::endl;
+        //DEBUG
+        //std::cout << "Information-theoretic minimum: " << info_theoretic_min << std::endl;
+        //std::cout << "Ford-Johnson theoretical bound: " << ford_johnson_bound << std::endl;
+        //std::cout << "Vector efficiency: " << (vector_comparisons <= ford_johnson_bound ? "EXCELLENT" : 
+        //             vector_comparisons <= ford_johnson_bound * 1.2 ? "GOOD" : "NEEDS IMPROVEMENT") << std::endl;
 
         //Testing deque implementation
         std::cout << "\n== Testing PmergeMeDeque == " << std::endl;
@@ -74,31 +75,31 @@ int main(int argc, char **argv)
         dequeSorter.sort();
         dequeSorter.printResults();
 
-        // Show comparison analysis for deque
-        int deque_comparisons = PmergeMeDeque::getComparisonCount();
-        std::cout << "Deque efficiency: " << (deque_comparisons <= ford_johnson_bound ? "EXCELLENT" : 
-                     deque_comparisons <= ford_johnson_bound * 1.2 ? "GOOD" : "NEEDS IMPROVEMENT") << std::endl;
+        //DEBUG - Show comparison analysis for deque
+        //int deque_comparisons = PmergeMeDeque::getComparisonCount();
+        //std::cout << "Deque efficiency: " << (deque_comparisons <= ford_johnson_bound ? "EXCELLENT" : 
+        //             deque_comparisons <= ford_johnson_bound * 1.2 ? "GOOD" : "NEEDS IMPROVEMENT") << std::endl;
 
         std::cout << "\n== Test completed successfully! == " << std::endl;
 
-        //Performance comparison
-        std::cout << "\n== Performance Comparison == " << std::endl;
+        //DEBUG - Performance comparison
+        //std::cout << "\n== Performance Comparison == " << std::endl;
         std::cout << "Vector time: " << vectorSorter.getExecutionTime() << " us" << std::endl;
         std::cout << "Deque time: " << dequeSorter.getExecutionTime() << " us" << std::endl;
-        std::cout << "Vector comparisons: " << vector_comparisons << std::endl;
-        std::cout << "Deque comparisons: " << deque_comparisons << std::endl;
+        //std::cout << "Vector comparisons: " << vector_comparisons << std::endl;
+        //std::cout << "Deque comparisons: " << deque_comparisons << std::endl;
 
-        if (dequeSorter.getExecutionTime() > 0)
-        {
-            double ratio = vectorSorter.getExecutionTime() / dequeSorter.getExecutionTime();
-            std::cout << "Vector / Deque time ratio: " << ratio << std::endl;
-        }
+        //if (dequeSorter.getExecutionTime() > 0)
+        //{
+        //    double ratio = vectorSorter.getExecutionTime() / dequeSorter.getExecutionTime();
+        //    std::cout << "Vector / Deque time ratio: " << ratio << std::endl;
+        //}
 
-        if (deque_comparisons > 0)
-        {
-            double comp_ratio = static_cast<double>(vector_comparisons) / deque_comparisons;
-            std::cout << "Vector / Deque comparison ratio: " << comp_ratio << std::endl;
-        }
+        //if (deque_comparisons > 0)
+        //{
+        //    double comp_ratio = static_cast<double>(vector_comparisons) / deque_comparisons;
+        //    std::cout << "Vector / Deque comparison ratio: " << comp_ratio << std::endl;
+        //}
 
     }
     catch (std::exception const& e)

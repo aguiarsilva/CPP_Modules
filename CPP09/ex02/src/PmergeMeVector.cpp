@@ -6,7 +6,7 @@
 /*   By: baguiar- <baguiar-@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/30 09:06:24 by baguiar-          #+#    #+#             */
-/*   Updated: 2025/08/20 00:01:22 by baguiar-         ###   ########.fr       */
+/*   Updated: 2025/08/27 09:07:53 by baguiar-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,6 @@ std::vector<int> PmergeMeVector::JacobsthalSequence(int pending_count)
         return insertion_order;
     }
 
-    // Pre-allocate space for better performance
     insertion_order.reserve(pending_count);
 
     // Generate Jacobsthal numbers: 1, 1, 3, 5, 11, 21, 43, 85, ...
@@ -186,13 +185,12 @@ void PmergeMeVector::insertPending(std::vector<int>& main_chain, std::vector<int
             
         int value = pending[pending_index]; 
             
-        // Critical optimization: Calculate proper upper bound for binary search 
         int search_limit; 
             
         if (pending_index == 0) 
         { 
             // pending[0] can only go up to position of its pair (main_chain[0]) 
-            search_limit = 1; // It's guaranteed ≤ main_chain[0] 
+            search_limit = 1;
         } 
         else 
         { 
@@ -287,10 +285,9 @@ void PmergeMeVector::recursiveFordJohnson(std::vector<int>& container)
         insertPending(main_chain, pending, straggler, has_straggler, jacobsthal_seq);
     }
     
-    container = main_chain; // C++98 assignment (no move semantics)
+    container = main_chain;
 }
 
-// New optimized insertion sort for small arrays
 void PmergeMeVector::insertionSort(std::vector<int>& container)
 {
     std::vector<int>::size_type i;
@@ -354,7 +351,8 @@ void PmergeMeVector::printResults() const
 
     std::cout << "Time to process a range of " << m_input.size()
         << " elements with std::vector : " << m_exec_time << " us " << std::endl;
-    std::cout << "Number of comparisons made: " << getComparisonCount() << std::endl;
+    //DEBUG
+    //std::cout << "Number of comparisons made: " << getComparisonCount() << std::endl;
 }
 
 double PmergeMeVector::getExecutionTime() const

@@ -6,7 +6,7 @@
 /*   By: baguiar- <baguiar-@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/01 12:17:52 by baguiar-          #+#    #+#             */
-/*   Updated: 2025/08/19 22:28:38 by baguiar-         ###   ########.fr       */
+/*   Updated: 2025/08/27 09:09:18 by baguiar-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,14 +27,14 @@ Utils &Utils::operator=(Utils const& other)
     return (*this);
 }
 
-//This function should convert args to vector, handle the argc/argv parsing, return a vector for classes Vector and Deque to use
+//This function converts args to vector, handle the argc/argv parsing, return a vector for classes Vector and Deque to use
 std::vector<int> Utils::inputParsing(int argc, char **argv)
 {
     if (argc < 2)
         throw std::invalid_argument("Usage: ./PmergeMe [unique positive ints...]");
 
     std::vector<int> res;
-    res.reserve(argc - 1); // Pre-allocate memory
+    res.reserve(argc - 1);
 
     int i;
     for (i = 1; i < argc; ++i)
@@ -130,7 +130,7 @@ void Utils::displayVec(std::vector<int> const& vec, std::string const& label)
     {
         std::vector<int>::const_iterator it;
         int count = 0;
-        for (it = vec.begin(); it != vec.end() && count < 10; ++it, ++count)
+        for (it = vec.begin(); it != vec.end() && count < 20; ++it, ++count)
         {
             std::cout << *it << " ";
         }
@@ -179,7 +179,7 @@ void Utils::displayVec(std::vector<int> const& vec, std::string const& label)
 //         return false;
 //     }
 
-//     // For larger inputs, use sorting approach O(n log n)
+//     // For larger inputs, use sorting approach
 //     std::vector<int> sorted_copy = input;
 //     std::sort(sorted_copy.begin(), sorted_copy.end());
 
