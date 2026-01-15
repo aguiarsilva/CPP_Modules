@@ -1,0 +1,227 @@
+# CPP Modules - 42 School
+
+A comprehensive C++ learning journey covering fundamental to advanced concepts through the 42 School curriculum.
+
+![C++](https://img.shields.io/badge/C++-98-blue.svg)
+![42 School](https://img.shields.io/badge/42-School-000000.svg)
+
+## 📖 Overview
+
+This repository contains 10 progressive C++ modules (CPP00-CPP09) completed as part of the 42 School curriculum. Each module focuses on specific C++ concepts, building from basic syntax to advanced topics like templates, STL containers, and design patterns.
+
+## 🎯 What I Learned
+
+### Core C++ Concepts
+- **Object-Oriented Programming**:  Classes, encapsulation, inheritance, and polymorphism
+- **Memory Management**: Dynamic allocation, deep vs shallow copying, RAII principles
+- **Orthodox Canonical Form**: Implementing constructors, destructors, copy constructors, and assignment operators
+- **Operator Overloading**: Custom behavior for standard operators
+- **Exception Handling**: Try-catch blocks and custom exception classes
+
+### Advanced Topics
+- **Polymorphism & Virtual Functions**: Pure virtual functions and abstract classes
+- **Templates**: Function templates, class templates, and template specialization
+- **STL Containers**: Vectors, lists, stacks, deques, and maps
+- **Type Casting**: Static, dynamic, reinterpret, and const casts
+- **Design Patterns**: Factory pattern, Strategy pattern
+- **Algorithm Optimization**: Merge-insertion sort (Ford-Johnson algorithm)
+
+## 📚 Module Breakdown
+
+### [CPP00](CPP00) - Introduction to C++
+**Key Concepts**:  Namespaces, classes, member functions, I/O streams, initialization lists
+
+**Projects**:
+- **ex00**:  Megaphone - First C++ program with string manipulation
+- **ex01**: PhoneBook - Contact management system using classes and arrays
+- **ex02**: Account - Banking system with static members and timestamps
+
+**Stack**:  C++98, iostream, iomanip, string manipulation
+
+---
+
+### [CPP01](CPP01) - Memory, Pointers, References
+**Key Concepts**: Memory allocation, pointers vs references, switch statements
+
+**Topics Covered**:
+- Dynamic memory management with `new` and `delete`
+- Pointers to members
+- References and their advantages
+- File stream operations
+
+**Stack**: C++98, dynamic memory, file I/O, references
+
+---
+
+### [CPP02](CPP02) - Ad-hoc Polymorphism & Fixed Point
+**Key Concepts**: Operator overloading, Orthodox Canonical Form, fixed-point numbers
+
+**Projects**: 
+- **ex00**: Fixed point class implementation
+- **ex01**: Operators overloading for fixed-point arithmetic
+- **ex02**: Comparison and arithmetic operators
+- **ex03**: BSP (Binary Space Partitioning) - Point in triangle algorithm
+
+**Stack**: C++98, operator overloading, fixed-point arithmetic, geometric algorithms
+
+---
+
+### [CPP03](CPP03) - Inheritance
+**Key Concepts**: Inheritance hierarchy, protected members, virtual functions
+
+**Projects**:
+- **ex00**: ClapTrap - Base robot class
+- **ex01**: ScavTrap - Inheritance and method overriding
+- **ex02**: FragTrap - Multiple derived classes
+- **ex03**: DiamondTrap - Diamond problem and virtual inheritance
+
+**Stack**: C++98, single/multiple inheritance, virtual inheritance, polymorphism
+
+---
+
+### [CPP04](CPP04) - Subtype Polymorphism
+**Key Concepts**: Abstract classes, interfaces, deep copies, virtual destructors
+
+**Projects**: 
+- **ex00**: Animal hierarchy with polymorphism
+- **ex01**:  Brain class and deep copying
+- **ex02**: Abstract Animal class
+- **ex03**:  Materia system - Interface implementation with Ice and Cure classes
+
+**Stack**: C++98, pure virtual functions, abstract classes, deep copy, RAII
+
+---
+
+### [CPP05](CPP05) - Exceptions & Bureaucracy
+**Key Concepts**: Exception handling, nested exceptions, custom exception classes
+
+**Projects**:
+- **ex00**: Bureaucrat class with exception handling
+- **ex01**: Form class with signing mechanics
+- **ex02**: Concrete form classes (Shrubbery, Robotomy, Presidential)
+- **ex03**: Intern class implementing factory pattern
+
+**Stack**: C++98, exceptions, std::exception, factory pattern, file I/O
+
+---
+
+### [CPP06](CPP06) - C++ Casts
+**Key Concepts**: Type conversion, static/dynamic/reinterpret casts, serialization
+
+**Projects**:
+- **ex00**: ScalarConverter - Type detection and conversion
+- **ex01**: Serialization - Pointer to integer conversion
+- **ex02**: Type identification using dynamic_cast
+
+**Stack**: C++98, static_cast, dynamic_cast, reinterpret_cast, RTTI
+
+---
+
+### [CPP07](CPP07) - Templates
+**Key Concepts**: Function templates, class templates, template specialization
+
+**Projects**:
+- **ex00**: Function templates (swap, min, max)
+- **ex01**: iter - Template function for array iteration
+- **ex02**: Array template class with bounds checking
+
+**Stack**: C++98, templates, generic programming, iterators
+
+---
+
+### [CPP08](CPP08) - Templated Containers & Iterators
+**Key Concepts**: STL containers, iterators, algorithms, custom container design
+
+**Projects**:
+- **ex00**: easyfind - Template function using std::find
+- **ex01**:  Span - Number storage with span calculation
+- **ex02**: MutantStack - Stack with iterator support
+
+**Stack**: C++98, STL (vector, list, stack, deque), iterators, algorithms
+
+---
+
+### [CPP09](CPP09) - STL Containers
+**Key Concepts**: Maps, stacks, advanced algorithms, performance analysis
+
+**Projects**:
+- **ex00**: Bitcoin Exchange - Price database using std::map
+- **ex01**:  RPN Calculator - Reverse Polish Notation using std::stack
+- **ex02**:  PmergeMe - Merge-insertion sort with performance comparison (vector vs deque)
+
+**Stack**: C++98, std::map, std::stack, std::vector, std::deque, sorting algorithms
+
+---
+
+## 🛠️ Tech Stack
+
+- **Language**: C++98
+- **Compiler**: c++ (g++/clang++)
+- **Compilation Flags**: `-Wall -Wextra -Werror -std=c++98`
+- **Build System**: Makefile
+- **Memory Check**: Valgrind
+
+## 🚀 Compilation & Usage
+
+Each module contains multiple exercises with individual Makefiles: 
+
+```bash
+# Navigate to any exercise directory
+cd CPP0X/exXX
+
+# Compile
+make
+
+# Run
+./executable_name
+
+# Clean object files
+make clean
+
+# Remove all generated files
+make fclean
+
+# Recompile
+make re
+
+# Memory leak check
+make valgrind
+```
+
+## 📋 Key Takeaways
+
+1. **Strong Foundation**: Solid understanding of C++ fundamentals including classes, memory management, and OOP principles
+2. **Design Patterns**: Practical implementation of factory pattern, strategy pattern, and RAII
+3. **STL Mastery**: Proficiency with STL containers, iterators, and algorithms
+4. **Template Programming**: Creating reusable, type-safe generic code
+5. **Performance Awareness**: Understanding container differences and algorithm complexity
+6. **Best Practices**: Following the Orthodox Canonical Form and proper resource management
+7. **Problem Solving**: Implementing complex algorithms like Ford-Johnson merge-insertion sort
+8. **Code Quality**: Writing maintainable, exception-safe C++ code
+
+## 📝 Coding Standards
+
+- **C++98 Standard**: All code complies with C++98 specifications
+- **Orthodox Canonical Form**: Every class implements: 
+  - Default constructor
+  - Copy constructor
+  - Copy assignment operator
+  - Destructor
+- **No Memory Leaks**: Validated with Valgrind
+- **Compilation Warnings**: Zero warnings with `-Wall -Wextra -Werror`
+- **Const Correctness**: Proper use of const qualifiers
+- **RAII Principles**: Resource acquisition is initialization
+
+## 🔗 Additional Resources
+
+- [42 School Curriculum](https://www.42.fr/)
+- [C++ Reference](https://en.cppreference.com/)
+- [C++98 Standard Documentation](https://www.iso.org/standard/25845.html)
+
+## 👨‍💻 Author
+
+**Bruno Leonardo Aguiar Silva - baguiar-** - 42 School Student
+
+---
+
+*This repository represents my journey through C++ at 42 School. Each module builds upon previous knowledge, creating a comprehensive understanding of C++ programming from basic syntax to advanced topics.*
