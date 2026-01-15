@@ -225,3 +225,4 @@ make valgrind
 ---
 
 *This repository represents my journey through C++ at 42 School. Each module builds upon previous knowledge, creating a comprehensive understanding of C++ programming from basic syntax to advanced topics.*
+
